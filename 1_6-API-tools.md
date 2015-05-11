@@ -8,8 +8,9 @@
   * curl
   * resty
 * Online tools
-  * Apiary
-  * Swagger
+  * [Apiary](https://apiary.io/)
+  * [Swagger](http://swagger.io/)
+  * [Runscope](https://www.runscope.com/)
 
 ## Chrome Extensions
 ###  [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) Makes JSON responses readable in the browser
