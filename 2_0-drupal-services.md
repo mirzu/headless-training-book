@@ -1,7 +1,9 @@
 # 2. Drupal Services
 
 ## Drupal Web Services
+
 ### Outline
+
 * Module Options
   * Why Restful
 * Install & configure Restful
@@ -70,16 +72,26 @@ Once the module is installed there is no exposed admin page. You need to create 
 Lets do that now!
 
 ## Create Endpoints
+
 ### Create a module
-#### 1. Create a folder called restful_fourword in the `sites/all/modules/custom` folder.
+
+#### 1. Create a folder called restful_fourword in the
+
+`sites/all/modules/custom` folder.
+
 #### 2. Create the .info file. `restful_fourword/restful_fourword.info`
+
 ```php
 name = My First RESTful API
 description = Custom RESTful endpoints for my blog.
 core = 7.x
 dependencies[] = restful
 ```
-### 3. Declare the plugin in the .module file `restful_fourword/restful_fourword.module`
+
+### 3. Declare the plugin in the .module file
+
+`restful_fourword/restful_fourword.module`
+
 ```
 /**
  * Implements hook_ctools_plugin_directory().
@@ -91,7 +103,9 @@ dependencies[] = restful
  }
 ```
 
-### 4. Declare an endpoint for blog posts. `restful_fourword/plugins/restful/node/blogposts/1.0/my_blogposts__1_0.inc`
+### 4. Declare an endpoint for blog posts.
+
+`restful_fourword/plugins/restful/node/blogposts/1.0/my_blogposts__1_0.inc`
 ```PHP
 $plugin = array(
   'label' => t('Blog Posts'),
@@ -142,6 +156,7 @@ RESTful comes with a bunch of out of the box functionality for any resource that
 * More info on consuming the API is in (this file)[https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/docs/api_url.md]
 
 ### 4.2 Error Handling
+
 If an error occurs when operating the REST endpoint via URL, A valid JSON object with ``code``, ``message`` and ``description`` would be returned.
 
 The RESTful module adheres to the [Problem Details for HTTP
@@ -184,8 +199,6 @@ Luckily RESTful is built from the ground up to facilitate easy versioning.
 * Add a `minor_version` key with a value of 1 to the plugin definition.
 * Clear the cache `drush cc all`
 * Visit the new version `/api/v1.1/blogposts`
-
-
 
 #### Accessing different API versions in RESTful.
 
