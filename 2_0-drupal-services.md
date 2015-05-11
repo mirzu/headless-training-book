@@ -106,7 +106,7 @@ dependencies[] = restful
 
 ### 4. Declare an endpoint for blog posts.
 
-`restful_fourword/plugins/restful/node/blogposts/1.0/my_blogposts__1_0.inc`
+`restful_fourword/plugins/restful/node/blogposts/1.0/blogPosts__1_0.inc`
 
 ```PHP
 <?php
@@ -120,17 +120,17 @@ $plugin = array(
   'class' => 'RestfulEntityBaseNode',
   'authentication_types' => TRUE,
   'authentication_optional' => TRUE,
+  'view_mode' => array(
+    'name' => 'default',
+    'field_map' => array(
+      'body' => 'body',
+      'field_blog_categories_term_tree' => 'categories',
+    ),
+  ),
 );
 ```
 
-Copy and paste the boiler plate above, and add a key called `view_mode` after the `authentication_optional` key with an array that has the following:
-
-| key       | value                               |
-| --------- | ----------------------------------- |
-| `name`      |  `default`                        |
-| `field_map` | array with key and value `body`   |
-
-The resource key determines the root URL of the resource. The name key must match the filename of the plugin: in this case, the name is my_blogposts, and therefore, the filename is my_blogposts.inc.
+The resource key determines the root URL of the resource. The name key must match the filename of the plugin: in this case, the name is `blogPosts__1_0`, and therefore, the filename is `blogPosts__1_0.inc`.
 
 This endpoint is created using the default view mode, and exposes any fields that are listed in the `field_map` array. *Note:* Fields must be visible in the view mode for them to show up.
 
