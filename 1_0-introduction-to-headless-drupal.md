@@ -95,6 +95,10 @@ Technically the controller itself isn't doing the rendering, but calling a 'rend
 In Express (similar to other frameworks), you'd do something like this,
 
     res.render('index', {response : drupal_json});
+    
+## You don't have to take down your existing Drupal site!
+
+You can add an API to your existing Drupal site and use it as a superset of the existing functionality.
 
 ## Real world Examples
 
