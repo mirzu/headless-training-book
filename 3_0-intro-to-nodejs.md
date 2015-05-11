@@ -126,7 +126,7 @@ foo.bar('baz', function (error, value) {
 
 CommonJS promises are sometimes referred to as _thenables_. This term derives from the then method available on a promise. The then method is the gateway to attaching callbacks<sup>1</sup>, and errbacks<sup>2</sup>.
 
-## [Q](https://github.com/kriskowal/q)
+## [Q](https://github.com/kriskowal/q) - a tool for creating and composing asynchronous promises in JavaScript
 
 > On the first pass, promises can mitigate the “Pyramid of Doom”: the situation where code marches to the right faster than it marches forward.
 
