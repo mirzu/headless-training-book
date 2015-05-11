@@ -93,6 +93,7 @@ dependencies[] = restful
 `restful_fourword/restful_fourword.module`
 
 ```
+<?php
 /**
  * Implements hook_ctools_plugin_directory().
  */
@@ -107,6 +108,7 @@ dependencies[] = restful
 
 `restful_fourword/plugins/restful/node/blogposts/1.0/my_blogposts__1_0.inc`
 ```PHP
+<?php
 $plugin = array(
   'label' => t('Blog Posts'),
   'resource' => 'blogposts',
@@ -120,7 +122,7 @@ $plugin = array(
 );
 ```
 
-Copy and paste the boiler plate above, and add a key called view_mode after the `authentication_optional` key with an array that has the following
+Copy and paste the boiler plate above, and add a key called `view_mode` after the `authentication_optional` key with an array that has the following:
 
 | key       | value                               |
 | --------- | ----------------------------------- |
