@@ -54,7 +54,7 @@
   - Example: [The Tonight Show Starring Jimmy Fallon](http://www.nbc.com/the-tonight-show)
 - Client Side templating
   - Built like a Web App
-  - [Angular](https://angularjs.org/) or [React](https://facebook.github.io/react/) used to render JSON
+  - [Angular](https://angularjs.org/), [React](https://facebook.github.io/react/) or [Ember](http://emberjs.com/) used to render JSON
    directly from an API.
   - Great for one page App experiences.
   - Highly dependent on API performance.
