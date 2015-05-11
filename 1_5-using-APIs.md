@@ -1,5 +1,8 @@
-# 1.5 Working with APIs
-There are a number of concepts and tools that will make working with APIs easier.
+# 1.5 What exactly is a REST API?
+
+REST: Everyone has heard about it, but not everyone has the same definition. It's become synonymos with the idea of a "web API," but it's real meaning is quite a bit more specific.
+
+> In short it's a web API that is designed to work like the WWW. 
 
 ## Outline
 * API terms
@@ -7,7 +10,6 @@ There are a number of concepts and tools that will make working with APIs easier
   * HTTP Methods (Verbs)
   * HTTP Status Codes
   * Media Type
-
 
 
 ## REST

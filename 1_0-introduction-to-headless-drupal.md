@@ -6,6 +6,7 @@
   * Separation of teams/resources
   * Same data, lots of different consumers
   * Architecture Patterns
+* Architecture Patterns for Decoupled sites.
 
 ## When to go Headless
 ### Speed of development
@@ -33,42 +34,41 @@
 - API Versioning strategy & implementation
 - API Documentation strategy & implementation
 
-
 ### Patterns
 - Cache & Theme
-  - passthrough to API
-  - cache response
-  - routing handled in lightweight application like node.js or Silex
-  - Examples
-  - Pros & Cons
+  - Light weight server is a proxy or passthrough to the backend API
+  - Provides flexability in how the content is rendered
+  - Provides a caching layer that makes the architecture independent of API server performance
+  - Routing and caching handled in lightweight application like [node.js](http://nodejs.org/) or [Silex](http://silex.sensiolabs.org/)
+  - Initial page load is faster than client side templating.
+  - Example: [The Tonight Show Starring Jimmy Fallon](http://www.nbc.com/the-tonight-show)
 - Client Side Tempting
-  - Web App
-  - Angular
-- Static Side Generator
-  - baked.js, roots.js
+  - Built like a Web App
+  - [Angular](https://angularjs.org/) or [React](https://facebook.github.io/react/) used to render JSON
+   directly from an API.
+  - Great for one page App experiences.
+  - Highly dependent on API performance.
+  - Initial page load will always be slower than server side rendering.
+- Static Site Generator
+  - [jekyll](http://jekyllrb.com/)
+  - [baked.js](http://prismicio.github.io/baked.js/)
+  - [roots.js](http://roots.cx/)
+  - perfect for sites that do not need frequent updates.
+  - Can be combined with a clientside MVC to make highly interactive sites.
+  - Has security and performance advantages
+  - Render it and forget it: Static sites don't need security upgrades.
 - Drupal to Drupal
-  - Separate creation and rendering but use everyone's favorite CMS for both.
+  - Separate creation and rendering but use everyone's favorite CMS for both API and rendering layer.
+  - Provides the separation of concerns advantages while keeping everything on the same technology.
 - Isomorphic Frameworks
-  - Rendered page first, followed by JSON.
-  - Angular-server
-  - http://fluxible.io/
-  - React something
-  - The holy grail.
+  - Rendered page first, followed by JSON updates to client side MVC.
+  - [Angular-server](https://github.com/saymedia/angularjs-server)
+  - [Flux](http://fluxible.io/)
+  - [React Isomorphic](http://bensmithett.github.io/going-isomorphic-with-react/)
+  - The holy grail, best of both worlds.
+  - Currently there isn't a framework that supports this type of development.
 
-
-### Technologies
-- Node.JS
-	- You build the webserver.
-    - You create routes and controllers and pick your rendering engine.
-    - Multiple options for frameworks. Express, Sails, Flatiron.
-- Silex
-	- Lightweight version of Symphony.
-	- PHP so it's a language you are familiar with.
-- Angular/Backbone/JS framework
-  - Cuts out the middleman
-  - Dependent on Drupal performance
-  - First page load can be heavy due to Client side templating.
-### MVC & The Real World
+### One way to think about it is distributed MVC.
 
 ![](http://itgcom.wpengine.netdna-cdn.com/wp-content/uploads3/2013/03/The-Real-World-Los-Angeles.jpg)
 
@@ -90,4 +90,12 @@ In Express (similar to other frameworks), you'd do something like this,
 
 ## Real world Examples
 
-TSWJF
+[The Tonight Show Starring Jimmy Fallon](http://www.nbc.com/the-tonight-show) (Node.js + Backbone.js): / [DrupalCon case study](https://austin2014.drupal.org/session/migrating-worlds-largest-website-drupal-weathercom) /via @vordude
+[Weather.com](http://www.weather.com/) (Angular): / DrupalCon case study /via @DamienMcKenna
+[Radio France Internationale](http://www.rfi.fr/) (Symfony 2): /via @slybud
+
+For a bigger list of examples see [this list](https://groups.drupal.org/node/432938):
+
+## Headless Talks at Drupalcon LA
+
+[Here's a quick blog post about the Headless talks this week](http://fourword.fourkitchens.com/article/drupalcon-la-headless-roundup)
