@@ -223,11 +223,7 @@ The URL is useful for humans, but the header is useful for building API clients.
 
 * Copy the 1.1 folder to a 1.2 folder.
 * Rename the `blogPosts__1_1.inc` file to `blogPosts__1_2.inc`
-* Add a `minor_version` key with a value of 1 to the plugin definition.
-* Copy the class file, rename it to `RestfulFourwordBlogPostsResource__1_2.class.php`, and update the plugin definition in  `blogPosts__1_2.inc` with the new name.
-* Update the class definition in `RestfulFourwordBlogPostsResource__1_2.class.php`
-* Clear the cache `drush cc all`
-* Visit the new version `/api/v1.2/blogposts`
+* Add a `minor_version` key with a value of 2 to the plugin definition.
 ```PHP
 <?php
 
