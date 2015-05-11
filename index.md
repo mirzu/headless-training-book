@@ -16,4 +16,4 @@ Matt taught himself HTML in 1996 while making a fansite for The Simpsons, even t
 
 ### Michal Minecki, Director of Technology at Four Kitchens
 
-Mike Minecki has been building websites since 1999, and has been working with Node.js and Drupal for about a year. He has worked on [Drupal Poetry](http://drupalpoetry.com/) an responsive web game that mimics the experience of playing with magnetic poetry on the web. He has taught Node.js in Austin and San Francisco, and has been speaking at events around the country about how to integrate Node.js and Drupal.
+Mike Minecki has been building websites since 1999, and has been working with Node.js and Drupal for about a year.  He has taught Node.js in Austin and San Francisco, and has been speaking at events around the country about how to integrate Node.js and Drupal.
