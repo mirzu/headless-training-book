@@ -30,6 +30,7 @@
   * Not a bad option overall
   * Custom endpoint creation is OK
   * Less robust server implementation
+  * Doesn't do versioning
 * RESTful
   * The module we are using for this class
   * Very good API for creating endpoints
