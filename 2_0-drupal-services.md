@@ -228,7 +228,7 @@ The URL is useful for humans, but the header is useful for building API clients.
 ```PHP
 /**
  * @file
- * Contains RestfulExampleArticlesResource__1_2.
+ * Contains RestfulFourwordBlogPostsResource__1_2.
  */
 
 class RestfulFourwordBlogPostsResource__1_2 extends RestfulEntityBaseNode {
