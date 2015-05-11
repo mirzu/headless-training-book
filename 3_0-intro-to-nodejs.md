@@ -73,10 +73,9 @@ Drupal 8 core runs without issue within HHVM. [ReactPHP](http://reactphp.org/)
 Chrome's JavaScript runtime is called V8, it's one of the reasons Chrome is considered so fast. Node.js leverages V8's speed on the server. Only one thing gets executed at a time, but libraries allow I/O or other intensive tasks to be executed asynchronously so the script doesn't need to wait for them to finish.
 
 * Rapid prototyping
-* **API Glue**
-* Queue'ish stuff
+* API Glue
+* Queue-ish stuff
 * Message passing
-
 * V8 Engine
 * Asynchronous libraries
 * Event Driven.
