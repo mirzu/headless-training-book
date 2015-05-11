@@ -92,11 +92,11 @@ In Express (similar to other frameworks), you'd do something like this,
 
 ## Real world Examples
 
-[The Tonight Show Starring Jimmy Fallon](http://www.nbc.com/the-tonight-show) (Node.js + Backbone.js): / [DrupalCon case study](https://austin2014.drupal.org/session/migrating-worlds-largest-website-drupal-weathercom) /via @vordude
-[Weather.com](http://www.weather.com/) (Angular): / DrupalCon case study /via @DamienMcKenna
-[Radio France Internationale](http://www.rfi.fr/) (Symfony 2): /via @slybud
+* [The Tonight Show Starring Jimmy Fallon](http://www.nbc.com/the-tonight-show) (Node.js + Backbone.js): / [DrupalCon case study](https://austin2014.drupal.org/session/migrating-worlds-largest-website-drupal-weathercom) /via @vordude
+* [Weather.com](http://www.weather.com/) (Angular): / DrupalCon case study /via @DamienMcKenna
+* [Radio France Internationale](http://www.rfi.fr/) (Symfony 2): /via @slybud
 
-For a bigger list of examples see [this list](https://groups.drupal.org/node/432938):
+For a bigger list of examples see [this list](https://groups.drupal.org/node/432938)
 
 ## Headless Talks at Drupalcon LA
 
