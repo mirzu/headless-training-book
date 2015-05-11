@@ -44,6 +44,8 @@ Additionally, add the following to `config/secrets.json`
 }
 ```
 
+Visit `/$HOME/train-headless/finished/node/headless-framework`
+
 ### Routing
 
 Breakup your route definitions into logical defaults. Something to remember is that routes are processed in order. Additionally all routes attached in `app.js` are processed after anything attached in `headless.js`.
