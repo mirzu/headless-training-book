@@ -224,10 +224,10 @@ The URL is useful for humans, but the header is useful for building API clients.
 
 /**
  * @file
- * Contains RestfulExampleArticlesResource__1_1.
+ * Contains RestfulExampleArticlesResource__1_2.
  */
 
-class RestfulFourwordBlogPostsResource__1_1 extends RestfulEntityBaseNode {
+class RestfulFourwordBlogPostsResource__1_2 extends RestfulEntityBaseNode {
   public function publicFieldsInfo() {
     $public_fields = parent::publicFieldsInfo();
 
@@ -241,7 +241,7 @@ class RestfulFourwordBlogPostsResource__1_1 extends RestfulEntityBaseNode {
 }
 ```
 
-This is all the code you need to create your first endpoint. Your first endpoint will now be available at `/api/v1.1/blogposts`.  
+This is all the code you need to create your first endpoint. Your first endpoint will now be available at `/api/v1.2/blogposts`.  
 
 It does the following:
 
@@ -258,13 +258,13 @@ Hey look at that someone created a categories endpoint for us: `/api/categories`
 
 #### Start by creating a new API endpoint version.
 
-* Copy the 1.0 folder to a 1.1 folder.
-* Rename the `blogPosts__1_1.inc` file to `blogPosts__1_2.inc`
+* Copy the 1.2 folder to a 1.3 folder.
+* Rename the `blogPosts__1_2.inc` file to `blogPosts__1_3.inc`
 * Add a `minor_version` key with a value of 1 to the plugin definition.
-* Copy the class file, rename it to `RestfulFourwordBlogPostsResource__1_2.class.php`, and update the plugin definition in  `blogPosts__1_2.inc` with the new name.
-* Update the class definition in `RestfulFourwordBlogPostsResource__1_2.class.php`
+* Copy the class file, rename it to `RestfulFourwordBlogPostsResource__1_3.class.php`, and update the plugin definition in  `blogPosts__1_3.inc` with the new name.
+* Update the class definition in `RestfulFourwordBlogPostsResource__1_3.class.php`
 * Clear the cache `drush cc all`
-* Visit the new version `/api/v1.2/blogposts`
+* Visit the new version `/api/v1.3/blogposts`
 
 #### Add the categories property.
 
