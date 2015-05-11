@@ -1,6 +1,7 @@
 # 1. Introduction to Headless Drupal
 
 ## Outline
+
 * When to go Headless
   * Speed of Development
   * Separation of teams/resources
@@ -11,14 +12,17 @@
 ## When to go Headless
 
 ### Speed of development
+
 - Faster if you have a REST API in place.
 - Not always initially faster. A headless approach to developing a Drupal site can lead to gains later in a project.
 
 ### Separation of teams/resources
+
 - Dedicated teams for building 'Drupal' resources, and dedicated teams for building rendering/presentation resources.
 - Lack of technical debt on teams. Focusing on a single set of tasks.
 
 ### Same data, lots of different consumers
+
 - Building one backend that will be consumed with many different systems.
     - Mention TSWJF?
 - Separation of concerns
@@ -27,10 +31,11 @@
 ## Architecture Patterns for Decoupled sites.
 
 ### Architecture parts
+
 - Routing
   - Clean URLs
 - Caching
-- Tempting
+- Templating
 - Error Handling
 - Interactivity
 - Authentication
@@ -39,6 +44,7 @@
 - API Documentation strategy & implementation
 
 ### Patterns
+
 - Cache & Theme
   - Light weight server is a proxy or passthrough to the backend API
   - Provides flexability in how the content is rendered
