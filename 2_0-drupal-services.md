@@ -52,16 +52,14 @@
 
 The content we'll be working with is populated with posts from the four kitchens blog. Below is a list of the fields that we'll be working with for easier reference. The login to your Database is admin:admin.
 
-  | Field Label | Machine Name | Field Type | Comments    |
-  | ----------- | ------------ | ---------- | ----------- |
-  | Lead image  | field_lead_image | Image |              |
-  | Body        | body         | Long Text |              |
-  | Inline Images | field_inline_image | Image |          |  
-  | Files       | field_blog_files | File |               |
-  | Blog Categories | field_blog_categories_term_tree | Term reference | |
-  | Blog Series | field_blog_series_term_tree | Term reference | | 
-
-This is easier to view here:
+| Field Label | Machine Name | Field Type | Comments    |
+| ----------- | ------------ | ---------- | ----------- |
+| Lead image  | field_lead_image | Image | |
+| Body | body | Long Text | |
+| Inline Images | field_inline_image | Image | |  
+| Files | field_blog_files | File | |
+| Blog Categories | field_blog_categories_term_tree | Term reference | |
+| Blog Series | field_blog_series_term_tree | Term reference | | 
 
 ## Install and Configure Restful
 The module is already installed. The only dependency is the [Entity API](https://drupal.org/project/entity) module. There is one [patch](https://www.drupal.org/node/2086225#comment-9627407)
