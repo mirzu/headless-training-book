@@ -64,8 +64,8 @@ The content we'll be working with is populated with posts from the four kitchens
 | Blog Series | field_blog_series_term_tree | Term reference | |
 
 ## Install and Configure Restful
-The module is already installed. The only dependency is the [Entity API](https://drupal.org/project/entity) module. There is one [patch](https://www.drupal.org/node/2086225#comment-9627407)
- to the Entity API module required.
+
+The module is already installed. The only dependency is the [Entity API](https://drupal.org/project/entity) module. There is one [patch](https://www.drupal.org/node/2086225#comment-9627407) to the Entity API module required.
 
 Once the module is installed there is no exposed admin page. You need to create your own module that declares a Restful plugin to use the module.
 
@@ -107,6 +107,7 @@ dependencies[] = restful
 ### 4. Declare an endpoint for blog posts.
 
 `restful_fourword/plugins/restful/node/blogposts/1.0/my_blogposts__1_0.inc`
+
 ```PHP
 <?php
 $plugin = array(
