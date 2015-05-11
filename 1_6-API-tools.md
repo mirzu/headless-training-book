@@ -14,11 +14,7 @@
 ## Chrome Extensions
 ###  [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) Makes JSON responses readable in the browser
 
-Turn this ugly mess.
-![unstructurd JSON](https://www.evernote.com/shard/s9/sh/9b28fd32-5354-4b6f-8a5f-0206b633991c/3324cbb2323b93b14c9fc888dbc2d5c4)
-
-Into something much more useful.
-![structured JSON](https://www.evernote.com/shard/s9/sh/088345c9-2656-4707-9ae8-1d94e273f6f3/8114d6b1fe365cd15371c101a156ff01)
+Makes reading JSON in the browser much, much easier. Lets go ahead and install this.
 
 ### [Postman](https://chrome.google.com/webstore/detail/postman-rest-client-packa/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 

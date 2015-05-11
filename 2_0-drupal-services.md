@@ -16,6 +16,7 @@
   * Apiary for mocking & Docs.
   * Mocking in Drupal directly.
 * Drupal Overview
+
 ### Different Module Options
 * Services
   * Oldest module
@@ -58,7 +59,9 @@ The content we'll be working with is populated with posts from the four kitchens
   | Inline Images | field_inline_image | Image |          |  
   | Files       | field_blog_files | File |               |
   | Blog Categories | field_blog_categories_term_tree | Term reference | |
-  | Blog Series | field_blog_series_term_tree | Term reference | | |
+  | Blog Series | field_blog_series_term_tree | Term reference | | 
+
+This is easier to view here:
 
 ## Install and Configure Restful
 The module is already installed. The only dependency is the [Entity API](https://drupal.org/project/entity) module. There is one [patch](https://www.drupal.org/node/2086225#comment-9627407)
