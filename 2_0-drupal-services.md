@@ -115,7 +115,7 @@ $plugin = array(
   'resource' => 'blogposts',
   'name' => 'blogPosts__1_0',
   'entity_type' => 'node',
-  'bundle' => 'blog_post',
+  'bundle' => 'article',
   'description' => t('Fourword blog posts using view modes'),
   'class' => 'RestfulEntityBaseNode',
   'authentication_types' => TRUE,
@@ -124,7 +124,8 @@ $plugin = array(
     'name' => 'default',
     'field_map' => array(
       'body' => 'body',
-      'field_blog_categories_term_tree' => 'categories',
+      'field_tags' => 'tags',
+      'field_image' => 'image',
     ),
   ),
 );
