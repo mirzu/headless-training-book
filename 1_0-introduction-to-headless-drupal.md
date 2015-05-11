@@ -49,10 +49,10 @@
   - Light weight server is a proxy or passthrough to the backend API
   - Provides flexability in how the content is rendered
   - Provides a caching layer that makes the architecture independent of API server performance
-  - Routing and caching handled in lightweight application like [node.js](http://nodejs.org/) or [Silex](http://silex.sensiolabs.org/)
+  - Routing and caching handled in lightweight application like [node.js](http://nodejs.org/),  [Silex](http://silex.sensiolabs.org/) or [ruby](https://www.ruby-lang.org/en/).
   - Initial page load is faster than client side templating.
   - Example: [The Tonight Show Starring Jimmy Fallon](http://www.nbc.com/the-tonight-show)
-- Client Side Tempting
+- Client Side templating
   - Built like a Web App
   - [Angular](https://angularjs.org/) or [React](https://facebook.github.io/react/) used to render JSON
    directly from an API.
