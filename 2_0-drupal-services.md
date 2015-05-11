@@ -59,7 +59,7 @@ The content we'll be working with is populated with posts from the four kitchens
   | Inline Images | field_inline_image | Image |          |  
   | Files       | field_blog_files | File |               |
   | Blog Categories | field_blog_categories_term_tree | Term reference | |
-  | Blog Series | field_blog_series_term_tree | Term reference | | 
+  | Blog Series | field_blog_series_term_tree | Term reference | |
 
 This is easier to view here:
 
@@ -73,27 +73,27 @@ Lets do that now!
 
 ## Create Endpoints
 ### Create a module
-#### 1. Create a folder called fkblog_restful in the `sites/all/modules/custom` folder.
-#### 2. Create the .info file. `my_restful/my_restful.info`
+#### 1. Create a folder called restful_fourword in the `sites/all/modules/custom` folder.
+#### 2. Create the .info file. `restful_fourword/restful_fourword.info`
 ```php
 name = My First RESTful API
 description = Custom RESTful endpoints for my blog.
 core = 7.x
 dependencies[] = restful
 ```
-### 3. Declare the plugin in the .module file `my_restful/my_restful.module`
+### 3. Declare the plugin in the .module file `restful_fourword/restful_fourword.module`
 ```
 /**
  * Implements hook_ctools_plugin_directory().
  */
- function my_restful_ctools_plugin_directory($module, $plugin) {
+ function restful_fourword_ctools_plugin_directory($module, $plugin) {
    if ($module == 'restful') {
      return 'plugins/' . $plugin;
    }
  }
 ```
 
-### 4. Declare an endpoint for blog posts. `my_restful/plugins/restful/node/blogposts/1.0/my_blogposts__1_0.inc`
+### 4. Declare an endpoint for blog posts. `restful_fourword/plugins/restful/node/blogposts/1.0/my_blogposts__1_0.inc`
 ```PHP
 $plugin = array(
   'label' => t('Blog Posts'),
