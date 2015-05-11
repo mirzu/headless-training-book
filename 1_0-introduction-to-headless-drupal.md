@@ -9,12 +9,15 @@
 * Architecture Patterns for Decoupled sites.
 
 ## When to go Headless
+
 ### Speed of development
 - Faster if you have a REST API in place.
 - Not always initially faster. A headless approach to developing a Drupal site can lead to gains later in a project.
+
 ### Separation of teams/resources
 - Dedicated teams for building 'Drupal' resources, and dedicated teams for building rendering/presentation resources.
 - Lack of technical debt on teams. Focusing on a single set of tasks.
+
 ### Same data, lots of different consumers
 - Building one backend that will be consumed with many different systems.
     - Mention TSWJF?
@@ -22,6 +25,7 @@
 - When the the Drupal presentation layer is getting in your way.
 
 ## Architecture Patterns for Decoupled sites.
+
 ### Architecture parts
 - Routing
   - Clean URLs
@@ -69,8 +73,6 @@
   - Currently there isn't a framework that supports this type of development.
 
 ### One way to think about it is distributed MVC.
-
-![](http://itgcom.wpengine.netdna-cdn.com/wp-content/uploads3/2013/03/The-Real-World-Los-Angeles.jpg)
 
 The **Model** represents the data, and does nothing else. The model does NOT depend on the controller or the view. The **View** displays the model data, and sends user actions to the controller. The **Controller** provides model data to the view, and interprets user actions such as button clicks. The controller depends on the view and the model.
 
