@@ -118,6 +118,7 @@ The resource key determines the root URL of the resource. The name key must matc
 This endpoint is created using the default view mode, and exposes any fields that are listed in the `field_map` array. *Note:* Fields must be visible in the view mode for them to show up.
 
 Lets talk about the different parts of the array.
+
 * `label` - The label of the plugin.
 * `resource` - Name of the *resource*, must match the filename of the plugin.
 * `name` - Machine name of the plugin.
@@ -141,8 +142,7 @@ RESTful comes with a bunch of out of the box functionality for any resource that
 * More info on consuming the API is in (this file)[https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/docs/api_url.md]
 
 ### 4.2 Error Handling
-If an error occurs when operating the REST endpoint via URL, A valid JSON object
- with ``code``, ``message`` and ``description`` would be returned.
+If an error occurs when operating the REST endpoint via URL, A valid JSON object with ``code``, ``message`` and ``description`` would be returned.
 
 The RESTful module adheres to the [Problem Details for HTTP
 APIs](http://tools.ietf.org/html/draft-nottingham-http-problem-06) draft to
@@ -190,8 +190,10 @@ Luckily RESTful is built from the ground up to facilitate easy versioning.
 #### Accessing different API versions in RESTful.
 
 You can access different versions of the API using two different methods.
+
 1. Using the URL. Simply replace the `v1.1` with `v1.0`.
 2. Using a header.
+
 ```bash
 curl http://mirzu.fourword.webchefs.org:8080/api/v1.0/blogposts \
 -H "X-API-Version: v1.0"
@@ -225,6 +227,7 @@ class RestfulFourwordBlogPostsResource__1_1 extends RestfulEntityBaseNode {
 This is all the code you need to create your first endpoint. Your first endpoint will now be available at `/api/v1.1/blogposts`.  
 
 It does the following:
+
 * This extends the class `RestfulEntityBaseNode`. This is a convience class that makes working with entities easier. If you wanted to create an endpoint that exposed something else you would use a different base class.
 * Creates a public function `publicFieldsInfo()`.
 * In that function creates a variable called `$public_fields` populated with the parent's `publicFieldsInfo()`
@@ -260,6 +263,7 @@ $public_fields['categories'] = array(
 ```
 
 #### Bonus
+
 * _Silver_: Add a resource for the series by copying the categories endpoint and add a new property called series using the `field_blog_series_term_tree` property to link to it like categories.
 * _Gold_: Create an endpoint that links to the user API resource who authored the blog post.
 * _Platinum_: Create a new endpoint that exposes the sites variables see (this example)[https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/modules/restful_example/plugins/restful/variable/1.0/]
@@ -278,7 +282,6 @@ Being the good API authors we are lets create the final version of our API.
 * Clear the cache `drush cc all`
 * Visit the new version `/api/v1.3/blogposts`
 
-
 #### Add a property for the image.
 ```
 $public_fields['lead_image'] = array(
@@ -293,6 +296,7 @@ That works, but we are leaking lots of info our API consumers don't need, plus t
 RESTful gives us an easy way to process any callback.
 
 Add the following method to our class.
+
 ```PHP
 /**
  * Process callback, Remove Drupal specific items from the image array.
@@ -316,9 +320,11 @@ protected function fourwordImageProcess($value) {
   );
 }
 ```
+
 The process function accepts a Drupal field output array, and should return an array of mapped keys and values.
 
 We use this method on our resource by adding a `process_callbacks` array to the `lead_image` public_field. Add the following code below the `property` key.
+
 ```PHP
       'process_callbacks' => array(
         array($this, 'fourwordImageProcess'),
@@ -332,6 +338,7 @@ Finally there is a neat little function that will add image styles. Add the foll
 ```
 
 ### 6 API Best practices.
+
 Versioning isn't the only thing that makes for a good API. There has been a great deal written about this lately and here are some resources to get you started.
 
 * [A musical presentation about API design here at Drupalcon](http://fourword.fourkitchens.com/article/api-design-musical-live-drupalcon-la)
