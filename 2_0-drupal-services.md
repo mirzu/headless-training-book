@@ -224,9 +224,8 @@ The URL is useful for humans, but the header is useful for building API clients.
 * Copy the 1.1 folder to a 1.2 folder.
 * Rename the `blogPosts__1_1.inc` file to `blogPosts__1_2.inc`
 * Add a `minor_version` key with a value of 2 to the plugin definition.
-```PHP
-<?php
 
+```PHP
 /**
  * @file
  * Contains RestfulExampleArticlesResource__1_2.
@@ -244,6 +243,19 @@ class RestfulFourwordBlogPostsResource__1_2 extends RestfulEntityBaseNode {
     return $public_fields;
   }
 }
+
+$plugin = array(
+  'label' => t('Blog Posts'),
+  'resource' => 'blogposts',
+  'name' => 'blogPosts__1_2',
+  'entity_type' => 'node',
+  'bundle' => 'article',
+  'description' => t('Fourword blog posts using view modes'),
+  'class' => 'RestfulFourwordBlogPostsResource__1_2',
+  'authentication_types' => TRUE,
+  'authentication_optional' => TRUE,
+   'minor_version' => 2,
+);
 ```
 
 This is all the code you need to create your first endpoint. Your first endpoint will now be available at `/api/v1.2/blogposts`.  
