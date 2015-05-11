@@ -12,7 +12,7 @@ You will write code all day! By the end, you'll have written your first Node.js 
 
 ### Matt Grill, Engineer at Four Kitchens
 
-Matt taught himself HTML in 1996 while making a fansite for The Simpsons, even though he’s never actually watched the show. Matt’s interests in technology range from Arduino to automation and deployment. Matt currently maintains Is It Shaking?, a Node.js powered app for tracking and analysing earthquakes worldwide,[Is It Shaking?](http://isitshaking). He has been working with JavaScript for nearly 10 years. Matt has spoke most recently about Docker and Drupal at SANDCamp 2014.
+Matt taught himself HTML in 1996 while making a fansite for The Simpsons, even though he’s never actually watched the show. Matt’s interests in technology range from Arduino to automation and deployment. Matt currently maintains [Is It Shaking?](http://isitshaking.com/), a Node.js powered app for tracking and analysing earthquakes worldwide. He has been working with JavaScript for nearly 10 years. Matt has spoke most recently about Docker and Drupal at SANDCamp 2014.
 
 ### Michal Minecki, Director of Technology at Four Kitchens
 
