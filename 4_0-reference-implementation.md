@@ -46,7 +46,7 @@ Additionally, add the following to `config/secrets.json`
 }
 ```
 
-Run `npm install` from `/$HOME/train-headless/finished/node/headless-framework`. Then run `PORT={YOUR PORT} gulp local"
+Run `npm install` from `/$HOME/train-headless/finished/node/headless-framework`. Then run `PORT={YOUR PORT} gulp local`.
 
 ### Routing
 
