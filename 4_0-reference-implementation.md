@@ -34,6 +34,8 @@ Update the `git` sub modules for this project, _there are a few_.
 git submodule update
 ```
 
+Visit `/$HOME/train-headless/finished/node/headless-framework`
+
 Additionally, add the following to `config/secrets.json`
 
 ```json
@@ -44,7 +46,7 @@ Additionally, add the following to `config/secrets.json`
 }
 ```
 
-Visit `/$HOME/train-headless/finished/node/headless-framework`
+Run `npm install` from `/$HOME/train-headless/finished/node/headless-framework`. Then run `PORT={YOUR PORT} gulp local"
 
 ### Routing
 
