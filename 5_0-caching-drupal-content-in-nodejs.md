@@ -37,13 +37,13 @@ client.mget(['my-key', 'my-second-key'], function (err, data) {
 })
 ```
 
-
 ## Activities
 
 ### Requesting Data from Drupal
 
 Require some new libraries we'll need for these activities.
 
+- Copy `app.default.js` to `app.js`
 - Require `redis`, `request`, and `crypto`.
 - Create a `redis` client, `client = redis.createClient();`
 
