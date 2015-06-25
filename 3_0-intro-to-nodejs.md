@@ -8,7 +8,6 @@ At the end of this section you'll have a basic understanding of Node.js ®, Prom
 - Events, Threads, and Concurrency
 - Why not Drupal & HHVM
 - Why Node?
-- Async and Promises
 
 ## What is Node.js? An Introduction.
 
