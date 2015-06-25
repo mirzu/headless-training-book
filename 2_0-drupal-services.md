@@ -106,7 +106,7 @@ As you can see we are going to add a file "plugins/restful/node/blog_posts/1.0/b
 Lets get started.
 
 ### 1. Declare an endpoint for blog posts.
-`restful_fourword/plugins/restful/node/blogposts/1.0/blogPosts__1_0.inc`
+`restful_fourword/plugins/restful/node/blog_posts/1.0/blogPosts__1_0.inc`
 
 ```PHP
 <?php
@@ -134,6 +134,7 @@ The resource key determines the root URL of the resource. The name key must matc
 This endpoint is created using the default view mode, and exposes any fields that are listed in the `field_map` array. _Note:_ Fields must be visible in the view mode for them to show up.
 
 Lets talk about the different parts of the array.
+
 - `label` - The label of the plugin.
 - `resource` - Name of the _resource_, must match the filename of the plugin.
 - `name` - Machine name of the plugin.
@@ -148,9 +149,10 @@ Lets talk about the different parts of the array.
 
 ### 1.1 All the stuff you can do now!
 RESTful comes with a bunch of out of the box functionality for any resource that you create. Including
-- See a paginated list of blog posts, and use hyper links to go to different pages: `api/blogposts`
-- Get a specific blog post: `api/blogposts/29,143`
-- Limit the fields returned using the _fields=_ query parameter `api/blogposts/29?fields=body`
+
+- See a paginated list of blog posts, and use hyper links to go to different pages: `api/articles`
+- Get a specific blog post: `api/articles/29,143`
+- Limit the fields returned using the _fields=_ query parameter `api/articles/29?fields=body`
 - Filter the API using the _filter[lable]=_ query parameter.
 - More info on consuming the API is in (this file)[[https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/docs/api_url.md](https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/docs/api_url.md)]
 
@@ -162,7 +164,7 @@ The RESTful module adheres to the [Problem Details for HTTP APIs](http://tools.i
 For example, trying to sort a list by an invalid key
 
 ```shell
-curl https://example.com/api/v1/articles?sort=wrong_key
+curl http://mirzu.drupal.tcdc2015.4kclass.com:8080/api/v1.0/articles?sort=wrong_key
 ```
 
 Will result with an HTTP code 400, and the following JSON:
@@ -189,6 +191,7 @@ This isn't output isn't great. The HTML surrounding the categories is going to m
 Lets create a new version of our API. Once your API is published to the world it's important to be diligent about versioning. There is nothing worse than having your site broken by an API that changed. OK, having your site broken on a _Friday_ by a broken API is worse.
 
 Luckily RESTful is built from the ground up to facilitate easy versioning.
+
 - Copy the 1.0 folder to a 1.1 folder.
 - Rename the `blogPosts__1_0.inc` file to `blogPosts__1_1.inc`
 - Add a `minor_version` key with a value of 1 to the plugin definition.
@@ -197,6 +200,7 @@ Luckily RESTful is built from the ground up to facilitate easy versioning.
 
 #### Accessing different API versions in RESTful.
 You can access different versions of the API using two different methods.
+
 1. Using the URL. Simply replace the `v1.1` with `v1.0`.
 2. Using a header.
 
@@ -212,13 +216,16 @@ Using the view modes is fine, but the real power of Restful comes from creating 
 
 `git commit -am "end of lesson2"`
 
-`git checkout -b lesson2 lesson_3_start`
+`git checkout -b lesson3 lesson_3_start`
 
 #### 3.1 Start by creating a new API endpoint version.
+
 - Copy the 1.1 folder to a 1.2 folder.
 - Rename the `blogPosts__1_1.inc` file to `blogPosts__1_2.inc`
 - Add a `minor_version` key with a value of 2 to the plugin definition.
-- Add the following class to `blogPosts__1_2.inc`
+- Add the following class to
+
+`blogPosts__1_2.inc`
 
 ```PHP
 /**
@@ -251,7 +258,7 @@ Finally, remove the `view_mode` key; it's no longer needed with the class! The f
 ```
 $plugin = array(
   'label' => t('Blog Posts'),
-  'resource' => 'blogposts',
+  'resource' => 'articles',
   'name' => 'blogPosts__1_2',
   'entity_type' => 'node',
   'bundle' => 'article',
@@ -266,6 +273,7 @@ $plugin = array(
 This is all the code you need to create your new endpoint, which will be available at `/api/v1.2/articles`.  
 
 It does the following:
+
 - This extends the class `RestfulEntityBaseNode`. This is a convience class that makes working with entities easier. If you wanted to create an endpoint that exposed something else you would use a different base class.
 - Creates a public function `publicFieldsInfo()`.
 - In that function creates a variable called `$public_fields` populated with the parent's `publicFieldsInfo()`
@@ -345,6 +353,7 @@ Finally there is a neat little function that will add image styles. Add the foll
 ```
 
 #### Bonus
+
 - _Silver_: Add a resource for the series by copying the categories endpoint and add a new property called series using the `field_blog_series_term_tree` property to link to it like categories.
 - _Gold_: Create an endpoint that links to the user API resource who authored the blog post.
 - _Platinum_: Create a new endpoint that exposes the sites variables see (this example)[[https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/modules/restful_example/plugins/restful/variable/1.0/](https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/modules/restful_example/plugins/restful/variable/1.0/)]
