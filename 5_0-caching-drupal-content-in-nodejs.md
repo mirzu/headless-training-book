@@ -66,7 +66,7 @@ var express = require('express'),
 ```javascript
 app.get('/posts', function (req, res) {
   request({
-    url: 'http://mirzu.restful.webchefs.org:8080/api/v1.2/blogposts',
+    url: 'http://mirzu.drupal.tcdc2015.4kclass.com:8080/api/v1.2/articles',
     json: true
   }, function (error, response, body) {
     return res.send(body);
@@ -88,7 +88,7 @@ For the callback function you get three variables, `error`, `response`, `body`.
 Store the remote url and our `cacheKey` as variables so they can be reused. Make sure these variables are declared within the `app.get()` callback.
 
 ```javascript
-var remote = 'http://mirzu.restful.webchefs.org:8080/api/v1.2/blogposts',
+var remote = 'http://mirzu.drupal.tcdc2015.4kclass.com:8080/api/v1.2/articles',
     cacheKey = crypto.createHash('sha1').update(req.url + port).digest('hex');
 ```
 
