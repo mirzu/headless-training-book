@@ -5,7 +5,7 @@ At the end of this section you'll have a basic understanding of Node.js ®, Prom
 ## Outline
 
 - What is Node.js
-- Events, Threads, Forking, and Concurrency
+- Events, Threads, and Concurrency
 - Why not Drupal & HHVM
 - Why Node?
 - Async and Promises
@@ -14,7 +14,7 @@ At the end of this section you'll have a basic understanding of Node.js ®, Prom
 
 > Node.js® is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
 
-## Events, threads, forking, concurrency, what?
+## Events, threads, concurrency, what?
 
 The traditional concurrency model is to spawn a new child process to serve each connection. The parent process will remain available for listening to new connections. Each new connection results in the creation of a child process dedicated to it.
 
