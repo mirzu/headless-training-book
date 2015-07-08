@@ -154,7 +154,7 @@ RESTful comes with a bunch of out of the box functionality for any resource that
 - Get a specific blog post: `api/articles/29,143`
 - Limit the fields returned using the _fields=_ query parameter `api/articles/29?fields=body`
 - Filter the API using the _filter[lable]=_ query parameter.
-- More info on consuming the API is in (this file)[[https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/docs/api_url.md](https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/docs/api_url.md)]
+- More info on consuming the API is in (this file)[https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/docs/api_url.md].
 
 ### 1.2 Error Handling
 If an error occurs when operating the REST endpoint via URL, A valid JSON object with `code`, `message` and `description` would be returned.
