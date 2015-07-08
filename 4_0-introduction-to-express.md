@@ -112,6 +112,8 @@ At this point running, `node app.js`, this will yield nothing. However, if you h
 
   app.listen(process.env.PORT || 3000);
 
+  console.log(‘App is listening on %s’, process.env.PORT);
+
   return app;
 })();
 ```
@@ -122,7 +124,7 @@ Let's add a few simple routes to the application. Express can respond to various
 
 ```javascript
 app.get('/example', function (req, res) {
-    res.send('Welcome to TCDC.');
+    res.send('Welcome to NYC Camp.');
 });
 ```
 
