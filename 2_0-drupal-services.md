@@ -159,12 +159,12 @@ RESTful comes with a bunch of out of the box functionality for any resource that
 ### 1.2 Error Handling
 If an error occurs when operating the REST endpoint via URL, A valid JSON object with `code`, `message` and `description` would be returned.
 
-The RESTful module adheres to the [Problem Details for HTTP APIs](http://tools.ietf.org/html/draft-nottingham-http-problem-06) draft to improve DX when dealing with HTTP API errors. Download and enable the [Advanced Help](https://drupal.org/project/advanced_help) module for more information about the errors.
+The RESTful module adheres to the [Problem Details for HTTP APIs](http://tools.ietf.org/html/draft-nottingham-http-problem-06) draft to improve DX when dealing with HTTP API errors.
 
 For example, trying to sort a list by an invalid key
 
 ```shell
-curl http://mirzu.drupal.tcdc2015.4kclass.com:8080/api/v1.0/articles?sort=wrong_key
+curl http://finished.drupal.headless.4kclass.com:8080/api/articles?sort=wrong_key
 ```
 
 Will result with an HTTP code 400, and the following JSON:
