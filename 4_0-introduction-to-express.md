@@ -112,7 +112,7 @@ At this point running, `node app.js`, this will yield nothing. However, if you h
 
   app.listen(process.env.PORT || 3000);
 
-  console.log(‘App is listening on %s’, process.env.PORT);
+  console.log('App is listening on %s', process.env.PORT);
 
   return app;
 })();
