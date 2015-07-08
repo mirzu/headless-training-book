@@ -1,6 +1,6 @@
 # 3 Intro to Node.js
 
-At the end of this section you'll have a basic understanding of Node.js ®, Promises, and basic async concepts.
+At the end of this section you'll have a basic understanding of Node.js®, Promises, and basic async concepts.
 
 ## Outline
 
@@ -43,8 +43,8 @@ In event-driven model, all the events are treated by a gigantic loop know as the
 
 * Requests, etc. arrive
 * Added to the _event loop_
-* Each event registers a callback, and executes it operation. 
-* Operation completes and triggers the callback. 
+* Each event registers a callback, and executes it operation.
+* Operation completes and triggers the callback.
 * Next event is processed.
 
 > Imagine a king with servants.
@@ -53,11 +53,11 @@ Every morning all the servants line up, one at a time they come into his throne 
 
 ## Why is PHP & Drupal bad at handling concurrency?
 
-Drupal has a large memory foot print. You might need to allocate 100mb just to serve some JSON. 
+Drupal has a large memory foot print. You might need to allocate 100mb just to serve some JSON.
 
-> Exaggerated
+> Exaggerated. Kinda.
 
-However, everything happens in order. Each IO operation blocks all subsequent ones. A _100ms_ request to the DB will block process execution. 
+However, everything happens in order. Each IO operation blocks all subsequent ones. A _100ms_ request to the DB will block process execution.
 
 ### Why not write non-blocking, event-driven PHP?
 
@@ -75,7 +75,3 @@ Chrome's JavaScript runtime is called V8, it's one of the reasons Chrome is cons
 * **API Glue**
 * Queue'ish stuff
 * Message passing
-
-* V8 Engine
-* Asynchronous libraries
-* Event Driven.
