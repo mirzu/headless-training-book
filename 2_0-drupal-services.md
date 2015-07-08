@@ -179,7 +179,7 @@ Will result with an HTTP code 400, and the following JSON:
 ```
 
 ### 1.3 Add categories.
-Add a new key to the `view_modes` key that is `field_blog_categories_term_tree` with a value of categories.
+Add a new key to the `view_modes` key that is `field_blog_categories_term_tree` with a value of `categories`. Go to the interface and add the blog categories to the default view mode.
 
 This isn't output isn't great. The HTML surrounding the categories is going to make life hard for our API consumers. We could install (Display Suite)[[https://www.drupal.org/project/ds](https://www.drupal.org/project/ds)], but even with those tools we are going to hit a wall sometime or another. Lets try creating a more custom endpoint instead.
 
@@ -282,7 +282,7 @@ It does the following:
 ### 4.0 Add categories to the endpoint.
 The same technique can be used to add any text or numerical fields as properties to your API, but what if you want to add links to other resources? For example lets say we created and endpoint that is for categories, and wanted to link to all the categories that each blog post has?
 
-Hey look at that someone created a categories endpoint for us: `/api/categories`. Open up the folder and take quick look, we didn't need to do anything besides declare the class.
+Hey look at that someone created a categories endpoint for us: `/api/blog_categories`. Open up the folder and take quick look, we didn't need to do anything besides declare the class.
 
 #### Add the categories property.
 Add the following after the body property. This will create a link to the blog categories which is a link to the `blog_categories` endpoint.
@@ -291,7 +291,7 @@ Add the following after the body property. This will create a link to the blog c
 $public_fields['categories'] = array(
   'property' => 'field_blog_categories_term_tree',
   'resource' => array(
-    'blog_categories' => 'categories',
+    'blog_categories' => 'blog_categories',
   ),
 );
 ```
