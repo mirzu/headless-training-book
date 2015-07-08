@@ -40,45 +40,21 @@
 - API Documentation strategy & implementation
 
 ### Patterns
+For an in depth look at these topics you should check out Mike Minecki's talk this weekend, [Headless Drupal Architecture Patterns](http://nyccamp.org/session/headless-drupal-architecture-patterns)
+
 - Cache & Theme
-  - Light weight server is a proxy or passthrough to the backend API
-  - Provides flexability in how the content is rendered
-  - Provides a caching layer that makes the architecture independent of API server performance
-  - Routing and caching handled in lightweight application like [node.js](http://nodejs.org/),  [Silex](http://silex.sensiolabs.org/) or [ruby](https://www.ruby-lang.org/en/).
-  - Initial page load is faster than client side templating.
-  - Example: [The Tonight Show Starring Jimmy Fallon](http://www.nbc.com/the-tonight-show)
 
 - Client Side templating
-  - Built like a Web App
-  - [Angular](https://angularjs.org/), [React](https://facebook.github.io/react/) or [Ember](http://emberjs.com/) used to render JSON
-  - directly from an API.
-  - Great for one page App experiences.
-  - Highly dependent on API performance.
-  - Initial page load will always be slower than server side rendering.
 
 - Static Site Generator
-  - [jekyll](http://jekyllrb.com/)
-  - [baked.js](http://prismicio.github.io/baked.js/)
-  - [roots.js](http://roots.cx/)
-  - perfect for sites that do not need frequent updates.
-  - Can be combined with a clientside MVC to make highly interactive sites.
-  - Has security and performance advantages
-  - Render it and forget it: Static sites don't need security upgrades.
 
 - Drupal to Drupal
-  - Separate creation and rendering but use everyone's favorite CMS for both API and rendering layer.
-  - Provides the separation of concerns advantages while keeping everything on the same technology.
 
 - Isomorphic Frameworks
-  - Rendered page first, followed by JSON updates to client side MVC.
-  - [Angular-server](https://github.com/saymedia/angularjs-server)
-  - [Flux](http://fluxible.io/)
-  - [React Isomorphic](http://bensmithett.github.io/going-isomorphic-with-react/)
-  - The holy grail, best of both worlds.
-  - Currently there isn't a framework that supports this type of development.
 
 ## You don't have to take down your existing Drupal site!
 You can add an API to your existing Drupal site and use it as a superset of the existing functionality.
+For a deeper look into this topic, maybe check out my talk this weekend, [Nearly Headless Drupal](http://nyccamp.org/session/nearly-headless-drupal)!
 
 ## Real world Examples
 - [The Tonight Show Starring Jimmy Fallon](http://www.nbc.com/the-tonight-show) (Node.js + Backbone.js): / [DrupalCon case study](https://austin2014.drupal.org/session/migrating-worlds-largest-website-drupal-weathercom) /via @vordude
@@ -88,4 +64,4 @@ You can add an API to your existing Drupal site and use it as a superset of the 
 For a bigger list of examples see [this list](https://groups.drupal.org/node/432938)
 
 ## Headless Talks at Drupalcon LA
-[Here's a quick blog post about the Headless talks this week](http://fourword.fourkitchens.com/article/drupalcon-la-headless-roundup)
+[Here's a quick blog post about the Headless talks we gave at DCLA](http://fourword.fourkitchens.com/article/drupalcon-la-headless-roundup)
