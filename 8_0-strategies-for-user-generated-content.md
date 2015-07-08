@@ -1,4 +1,4 @@
-# 6. Strategies for User Generated Content
+# 8. Strategies for User Generated Content
 
 So far we've talked exclusively about how to get content out of Drupal. In this last section we'll talk about how to get content into Drupal.
 
