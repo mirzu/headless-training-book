@@ -8,10 +8,10 @@
   * curl
   * resty
 * Online tools
-  * [Apiary](https://apiary.io/)
-  * [Swagger](http://swagger.io/)
-  * [Runscope](https://www.runscope.com/)
-  * [MuleSoft](https://www.mulesoft.com/)
+  * [Apiary](https://apiary.io/) - An API Documentation Tool
+  * [Swagger](http://swagger.io/) - API Documentation and Editing Tools
+  * [Runscope](https://www.runscope.com/) - An API Monitoring Tool, useful for CI
+  * [MuleSoft](https://www.mulesoft.com/) - An API Services company, providing design, monitoring, and training services and resources
 
 ## Chrome Extensions
 ###  [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) Makes JSON responses readable in the browser
@@ -20,36 +20,37 @@ Makes reading JSON in the browser much, much easier. Lets go ahead and install t
 
 ### [Postman](https://chrome.google.com/webstore/detail/postman-rest-client-packa/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 
-A tool that makes it easy to explore, test and experiment with APIs in the browser.
+A tool that makes it easy to explore, test and experiment with APIs in the browser or as a desktop app.
+Provides integration with [Newman](https://github.com/postmanlabs/newman), a command line API testing tool.
 
 ## Command line tools
 
 ### curl
-[curl](http://curl.haxx.se/) curl is a command line tool for transfering data with URL syntax. It is very flexible and gives you a great deal of flexibility when sending URL requests.
+[curl](http://curl.haxx.se/) curl is a command line tool for transferring data with URL syntax. It is very flexible and gives you a great deal of flexibility when sending URL requests.
 
 ```shell
-curl http://mirzu.fourword.webchefs.org/api/blogposts
+curl http://USERNAME.drupal.4kclass.com/api/blogposts
 ```
 
 useful Flags
 `-X, --request <command>` Send a specific request method.
 ```shell
-curl -X OPTIONS http://mirzu.fourword.webchefs.org/api/blogposts
+curl -X OPTIONS http://USERNAME.drupal.4kclass.com/api/blogposts
 ```
 
 `-i, --include` Include header in output.
 ```shell
-curl -X OPTIONS -i http://mirzu.fourword.webchefs.org/api/blogposts
+curl -X OPTIONS -i http://USERNAME.drupal.4kclass.com/api/blogposts
 ```
 
 `-O, --remote-name` Save the output into a file named after the url.
 ```shell
-curl -X OPTIONS -i -O http://mirzu.fourword.webchefs.org/api/blogposts
+curl -X OPTIONS -i -O http://USERNAME.drupal.4kclass.com/api/blogposts
 ```
 
 `-u, --user <user:password>` Send a username and password.
 ```shell
-curl -u fk:fkbuild http://mirzu.fourword.webchefs.org/api/blogposts
+curl -u fk:fkbuild http://USERNAME.drupal.4kclass.com/api/blogposts
 ```
 There are many, many more options available that will allow very powerful manipulations how requests to URLs are crafted.
 
