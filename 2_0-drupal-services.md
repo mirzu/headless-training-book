@@ -205,7 +205,7 @@ You can access different versions of the API using two different methods.
 2. Using a header.
 
 ```bash
-curl http://mirzu.fourword.webchefs.org:8080/api/v1.0/blogposts \
+curl http://finished.drupal.headless.4kclass.com:8080/api/articles \
 -H "X-API-Version: v1.0"
 ```
 
