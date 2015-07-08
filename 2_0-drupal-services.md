@@ -291,7 +291,7 @@ Add the following after the body property. This will create a link to the blog c
 $public_fields['categories'] = array(
   'property' => 'field_blog_categories_term_tree',
   'resource' => array(
-    'blog_categories' => 'blog_categories',
+    'blog_categories' => 'categories',
   ),
 );
 ```
@@ -301,7 +301,7 @@ $public_fields['categories'] = array(
 
 ```
 $public_fields['lead_image'] = array(
-  'property' => 'lead_image',
+  'property' => 'field_lead_image',
 );
 ```
 
