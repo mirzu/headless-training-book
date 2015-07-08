@@ -2,7 +2,7 @@
 
 REST: Everyone has heard about it, but not everyone has the same definition. It's become synonymos with the idea of a "web API," but it's real meaning is quite a bit more specific.
 
-> In short it's a web API that is designed to work like the WWW. 
+> In short it's a web API that is designed to work like the WWW.
 
 ## Outline
 * API terms
@@ -28,7 +28,7 @@ If an API is following the REST principles it should have the following aspects:
 Define the desired action to be used when accessing a resource. You are likely familiar with GET and POST, but there are also:
 HEAD, OPTIONS, PUT, DELETE, TRACE and CONNECT.
 
-### Safe and unsafe Methods.
+### Safe and UnSafe Methods.
 Safe methods are, by convention: GET, HEAD, OPTIONS and TRACE. Accessing with these methods will not change the state of the application.
 
 By contrast, methods such as POST, PUT, DELETE and PATCH are intended for actions that may cause side effects either on the server.
@@ -37,4 +37,4 @@ By contrast, methods such as POST, PUT, DELETE and PATCH are intended for action
 
 ## Media Type
 
-The [Internet media type](http://en.wikipedia.org/wiki/Internet_media_type) identifies the type of data the file contains. HTML pages will have the media type `text/HTML` and most of the APIs you use will be `application/json`.
+The [Internet media type](http://en.wikipedia.org/wiki/Internet_media_type) identifies the type of data the file contains. HTML pages will have the media type `text/HTML` and most of the APIs you use will be `application/json`. Some might use `application/xml` - I'm sorry.
