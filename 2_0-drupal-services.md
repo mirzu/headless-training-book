@@ -154,17 +154,17 @@ RESTful comes with a bunch of out of the box functionality for any resource that
 - Get a specific blog post: `api/articles/29,143`
 - Limit the fields returned using the _fields=_ query parameter `api/articles/29?fields=body`
 - Filter the API using the _filter[lable]=_ query parameter.
-- More info on consuming the API is in (this file)[[https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/docs/api_url.md](https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/docs/api_url.md)]
+- More info on consuming the API is in (this file)[https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/docs/api_url.md].
 
 ### 1.2 Error Handling
 If an error occurs when operating the REST endpoint via URL, A valid JSON object with `code`, `message` and `description` would be returned.
 
-The RESTful module adheres to the [Problem Details for HTTP APIs](http://tools.ietf.org/html/draft-nottingham-http-problem-06) draft to improve DX when dealing with HTTP API errors. Download and enable the [Advanced Help](https://drupal.org/project/advanced_help) module for more information about the errors.
+The RESTful module adheres to the [Problem Details for HTTP APIs](http://tools.ietf.org/html/draft-nottingham-http-problem-06) draft to improve DX when dealing with HTTP API errors.
 
 For example, trying to sort a list by an invalid key
 
 ```shell
-curl http://mirzu.drupal.tcdc2015.4kclass.com:8080/api/v1.0/articles?sort=wrong_key
+curl http://finished.drupal.headless.4kclass.com:8080/api/articles?sort=wrong_key
 ```
 
 Will result with an HTTP code 400, and the following JSON:
@@ -205,7 +205,7 @@ You can access different versions of the API using two different methods.
 2. Using a header.
 
 ```bash
-curl http://mirzu.fourword.webchefs.org:8080/api/v1.0/blogposts \
+curl http://finished.drupal.headless.4kclass.com:8080/api/articles \
 -H "X-API-Version: v1.0"
 ```
 
