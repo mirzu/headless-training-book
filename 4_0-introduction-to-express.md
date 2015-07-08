@@ -204,10 +204,10 @@ app.set('view engine', 'dust');
 ```html
 <html>
   <head>
-    <title>WELCOME TO TCDC.</title>
+    <title>WELCOME TO NYC Camp</title>
   </head>
   <body>
-    <h1>{name}, welcome to TCDC.</h1>
+    <h1>{name}, welcome to NYC Camp.</h1>
     <h2>Check out my sweet blog.</h2>
   </body>
 </html>
@@ -238,15 +238,15 @@ module.exports = {
   posts: [
     {
       'id': 1,
-      'title': 'Welcome to TCDC',
-      'body': 'This is the first entry in my TCDC travel log.',
-      'published': '6/26/2015'
+      'title': 'Welcome to NYC Camp',
+      'body': 'This is the first entry in my NYC Camp travel log.',
+      'published': '7/16/2015'
     },
     {
       'id': 2,
-      'title': 'TCDC is over.',
-      'body': 'On my way home from TCDC',
-      'published': '6/27/2015'
+      'title': 'NYC Camp is over.',
+      'body': 'On my way home from NYC Camp',
+      'published': '7/19/2015'
     }
   ]
 }
@@ -267,10 +267,10 @@ app.get('/articles', function (req, res) {
 ```html
 <html>
   <head>
-    <title>Articles from TCDC</title>
+    <title>Articles from NYC Camp</title>
   </head>
   <body>
-    <h1>{name}, welcome to TCDC.</h1>
+    <h1>{name}, welcome to NYC Camp.</h1>
     <h2>Check out my sweet blog.</h2>
     {#posts}
       <h3><a href="/article/{id}">{title}</a></h3>
