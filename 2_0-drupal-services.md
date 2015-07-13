@@ -3,21 +3,17 @@
 ### Outline
 - Module Options
   - Why Restful
-
 - Install & configure Restful
 - Create Endpoints
   - Single node endpoint
   - Node collection endpoint
     - Filtering content
-
   - Referenced content (node author)
   - Handling Media
   - Queued Content
-
 - Hypermedia API Design in practice
   - Apiary for mocking & Docs.
   - Mocking in Drupal directly.
-
 - Drupal Overview
 
 ### Different Module Options
@@ -28,11 +24,13 @@
   - Horrible default Entity endpoints
   - Custom endpoint creation is not intuitive and hard to work with
 
+
 - RESTws
   - Not a bad option overall
   - Custom endpoint creation is OK
   - Less robust server implementation
   - Doesn't do versioning
+
 
 - RESTful
   - The module we are using for this class
@@ -46,7 +44,6 @@
 
 - All endpoints are explicitly created. The module does nothing by default.
   - This allows for clean output and keeps _Drupalisms_ from leaking out into your API
-
 - Versioning is core to how endpoints are built
 - Endpoints are built around bundles, not entity types, making it easy to expose certain endpoints, but not others.
 - Configurable output formats allowing for output in JSON or XML
@@ -148,8 +145,7 @@ Lets talk about the different parts of the array.
 - `view_mode` - Array with info about the view mode to use for this endpoint.
 
 ### 1.1 All the stuff you can do now!
-RESTful comes with a bunch of out of the box functionality for any resource that you create. Including
-
+RESTful comes with a bunch of out of the box functionality for any resource that you create. Including:
 - See a paginated list of blog posts, and use hyper links to go to different pages: `api/articles`
 - Get a specific blog post: `api/articles/29,143`
 - Limit the fields returned using the _fields=_ query parameter `api/articles/29?fields=body`
@@ -352,7 +348,7 @@ Finally there is a neat little function that will add image styles. Add the foll
 'image_styles' => array('thumbnail', 'medium', 'large'),
 ```
 
-#### Bonus
+#### Extra Credit
 
 - _Silver_: Add a resource for the series by copying the categories endpoint and add a new property called series using the `field_blog_series_term_tree` property to link to it like categories.
 - _Gold_: Create an endpoint that links to the user API resource who authored the blog post.
