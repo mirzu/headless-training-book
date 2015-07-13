@@ -5,7 +5,6 @@
   - Separation of teams/resources
   - Same data, lots of different consumers
   - Architecture Patterns
-
 - Architecture Patterns for Decoupled sites.
 
 ## When to go Headless
@@ -19,8 +18,9 @@
 
 ### Same data, lots of different consumers
 - Building one backend that will be consumed with many different systems.
-  - Mention TSWJF?
-
+  - [TWiT.tv](http://fourword.fourkitchens.com/article/twittv-launches-content-api-and-headless-drupal-site)
+  - [Tonight Show with Jimmy Fallon](http://fourword.fourkitchens.com/article/and-emmy-goes)
+  - [DrupalCon Austin Session on TSwJF Architecture](https://www.youtube.com/watch?v=oxGfkTgxp6M)
 - Separation of concerns
 - When the the Drupal presentation layer is getting in your way.
 
@@ -28,14 +28,12 @@
 ### Architecture parts
 - Routing
   - Clean URLs
-
 - Caching
 - Templating
 - Error Handling
 - Interactivity
 - Authentication
   - Permissions
-
 - API Versioning strategy & implementation
 - API Documentation strategy & implementation
 
@@ -43,13 +41,9 @@
 For an in depth look at these topics you should check out Mike Minecki's talk this weekend, [Headless Drupal Architecture Patterns](http://nyccamp.org/session/headless-drupal-architecture-patterns)
 
 - Cache & Theme
-
 - Client Side templating
-
 - Static Site Generator
-
 - Drupal to Drupal
-
 - Isomorphic Frameworks
 
 ## You don't have to take down your existing Drupal site!
@@ -64,4 +58,4 @@ For a deeper look into this topic, maybe check out my talk this weekend, [Nearly
 For a bigger list of examples see [this list](https://groups.drupal.org/node/432938)
 
 ## Headless Talks at Drupalcon LA
-[Here's a quick blog post about the Headless talks we gave at DCLA](http://fourword.fourkitchens.com/article/drupalcon-la-headless-roundup)
+[Here's a blog post about some of the Headless talks at NYCCamp](http://fourword.fourkitchens.com/article/four-kitchens-nyc-camp-2015)
