@@ -14,7 +14,7 @@
   * [MuleSoft](https://www.mulesoft.com/) - An API Services company, providing design, monitoring, and training services and resources
 
 ## Chrome Extensions
-###  [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) Makes JSON responses readable in the browser
+###  [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en)
 
 Makes reading JSON in the browser much, much easier. Lets go ahead and install this.
 
