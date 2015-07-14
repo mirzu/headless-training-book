@@ -2,7 +2,7 @@
 
 ## Outline
 * Chrome Extensions
-  * JSONView
+  * JSONView -> insert anchor links to lower sections
   * POSTMAN
 * Command line tools
   * curl
@@ -23,7 +23,9 @@ Makes reading JSON in the browser much, much easier. Lets go ahead and install t
 A tool that makes it easy to explore, test and experiment with APIs in the browser or as a desktop app.
 Provides integration with [Newman](https://github.com/postmanlabs/newman), a command line API testing tool.
 
-## Command line tools
+Note: One easy way to prevent your personal Chrome extensions and settings from interfering with your daily development workflow is to use two different Chrome installations. The [Canary](https://www.google.com/chrome/browser/canary.html) channel version of Chrome may not be 100% stable for daily browsing, but it has the latest dev tools updates and makes for a fine development browser. To keep things visually distinct, you might apply a different theme to your Canary browser. [Atlantic Canary](https://chrome.google.com/webstore/detail/atlantic-canary/kdhdhbgeochfkblomjngbnebbmoeblpg?hl=en) is a simple theme that follows the yellow aesthetic of Canary.
+
+## Command line tools (Bonus Content)
 
 ### curl
 [curl](http://curl.haxx.se/) curl is a command line tool for transferring data with URL syntax. It is very flexible and gives you a great deal of flexibility when sending URL requests.
@@ -86,4 +88,5 @@ Now you can pretty print with a command that is easy to remember.
     $ GET / | json_reformat
 
 [More info on Resty](https://raw.githubusercontent.com/micha/resty)
+
 [More info on pretty printing JSON](http://www.skorks.com/2013/04/the-best-way-to-pretty-print-json-on-the-command-line/)
