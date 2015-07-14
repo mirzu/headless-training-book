@@ -20,7 +20,7 @@
 - Building one backend that will be consumed with many different systems.
   - [TWiT.tv](http://fourword.fourkitchens.com/article/twittv-launches-content-api-and-headless-drupal-site)
   - [Tonight Show with Jimmy Fallon](http://fourword.fourkitchens.com/article/and-emmy-goes)
-  - [DrupalCon Austin Session on TSwJF Architecture](https://www.youtube.com/watch?v=oxGfkTgxp6M)
+    - [DrupalCon Austin Session on TSwJF Architecture](https://www.youtube.com/watch?v=oxGfkTgxp6M)
 - Separation of concerns
 - When the the Drupal presentation layer is getting in your way.
 
@@ -58,4 +58,7 @@ For a deeper look into this topic, maybe check out my talk this weekend, [Nearly
 For a bigger list of examples see [this list](https://groups.drupal.org/node/432938)
 
 ## Headless Talks at Drupalcon LA
-[Here's a blog post about some of the Headless talks at NYCCamp](http://fourword.fourkitchens.com/article/four-kitchens-nyc-camp-2015)
+[A roundup of some great Headless talks at Drupalcon LA](http://fourword.fourkitchens.com/article/drupalcon-la-headless-roundup)
+
+## Headless Talks at NYCCamp
+[Here's a blog post about some of the Four Kitchens' Headless talks at NYCCamp](http://fourword.fourkitchens.com/article/four-kitchens-nyc-camp-2015)
