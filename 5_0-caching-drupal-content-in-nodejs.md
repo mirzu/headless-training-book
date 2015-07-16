@@ -91,7 +91,7 @@ For the callback function you get three variables, `error`, `response`, `body`.
 Store the remote url and our `cacheKey` as variables so they can be reused. Make sure these variables are declared within the `app.get()` callback.
 
 ```javascript
-var remote = 'http://USERNAME.drupal.4kclass.com:8080/api/v1.2/articles',
+var remote = 'http://USERNAME.drupal.headless.4kclass.com:8080/api/v1.2/articles',
     cacheKey = crypto.createHash('sha1').update(req.url + process.env.PORT).digest('hex');
 ```
 
