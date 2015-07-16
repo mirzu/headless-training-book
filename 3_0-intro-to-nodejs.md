@@ -6,7 +6,6 @@ At the end of this section you'll have a basic understanding of Node.js®, Promi
 
 - What is Node.js
 - Events, Threads, and Concurrency
-- Why not Drupal & HHVM
 - Why Node?
 
 ## What is Node.js? An Introduction.
@@ -58,14 +57,6 @@ Drupal has a large memory foot print. You might need to allocate 100mb just to s
 > Exaggerated. Kinda.
 
 However, everything happens in order. Each IO operation blocks all subsequent ones. A _100ms_ request to the DB will block process execution.
-
-### Why not write non-blocking, event-driven PHP?
-
-> [Photon](http://www.photon-project.com/)
-
-### HHVM and Evented PHP
-
-Drupal 8 core runs without issue within HHVM. [ReactPHP](http://reactphp.org/)
 
 ## Why Node?
 
