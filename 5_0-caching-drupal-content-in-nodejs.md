@@ -49,6 +49,9 @@ Require some new libraries we'll need for these activities.
 
 ---
 
+Install necessary modules
+`npm --save redis crypto request`
+
 ```javascript
 var express = require('express'),
       path = require('path'),
