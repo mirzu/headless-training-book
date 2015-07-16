@@ -180,6 +180,7 @@ Add a new key to the `view_modes` key that is `field_blog_categories_term_tree` 
 This isn't output isn't great. The HTML surrounding the categories is going to make life hard for our API consumers. We could install (Display Suite)[[https://www.drupal.org/project/ds](https://www.drupal.org/project/ds)], but even with those tools we are going to hit a wall sometime or another. Lets try creating a more custom endpoint instead.
 
 ### 2.0 Versioning your API.
+
 `git add .`
 
 `git commit -am "end of lesson1"`
@@ -211,6 +212,7 @@ The URL is useful for humans, but the header is useful for building API clients.
 
 ### 3.0 Create a custom endpoint.
 Using the view modes is fine, but the real power of Restful comes from creating custom endpoints. We'll make one now. You can save your work in this branch and create a new branch from the lesson 2 starting point.
+
 `git add .`
 
 `git commit -am "end of lesson2"`
@@ -354,6 +356,7 @@ Finally there is a neat little function that will add image styles. Add the foll
 ```
 
 Let's wrap up by putting this latest work into our git repository.
+
 `git add .`
 
 `git commit -am "end of lesson2"`
