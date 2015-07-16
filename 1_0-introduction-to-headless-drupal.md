@@ -1,4 +1,4 @@
-# 1. Introduction to Headless Drupal
+# 1 Introduction to Headless Drupal
 ## Outline
 - When to go Headless
   - Speed of Development

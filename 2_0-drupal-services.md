@@ -1,4 +1,4 @@
-# 2. Drupal Services
+# 2 Drupal Services
 ## Drupal Web Services
 ### Outline
 - Module Options

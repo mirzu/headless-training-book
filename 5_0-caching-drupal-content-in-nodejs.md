@@ -1,4 +1,4 @@
-# 5. Caching Drupal Content in Node.js
+# 5 Caching Drupal Content in Node.js
 
 ## Outline
 

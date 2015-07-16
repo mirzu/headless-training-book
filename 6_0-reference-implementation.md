@@ -1,4 +1,4 @@
-# 4. Reference implementation introduction
+# 6 Reference implementation introduction
 
 ## Outline
 
@@ -23,7 +23,7 @@
 
 - Place to explore ideas about this concept.
 - Consistent starting point.
-- Solve hard problems once, _maybe_. 
+- Solve hard problems once, _maybe_.
 - Maintenance
 
 ## Let's Make Something
@@ -77,9 +77,9 @@ In it's most basic form, `routeSection`, and `routeItem` are wrappers around the
 
 The first parameter is always the route to match, this can be a regex. The second parameter is the template that will be used to render the final response. Finally, the `options` object.
 
-There are a few optional keys, but the required one is the `resource` key. This is the internal API path. This is an array, and accepts unlimited values. Each request will be processed asynchronously, and their values returned, keyed by their name. 
+There are a few optional keys, but the required one is the `resource` key. This is the internal API path. This is an array, and accepts unlimited values. Each request will be processed asynchronously, and their values returned, keyed by their name.
 
-We'll refer to this as _multi-get_ in the future. 
+We'll refer to this as _multi-get_ in the future.
 
 ```javascript
 /**
@@ -155,7 +155,7 @@ var handleGet         = function (route, template, options) {
 
 > [headless.js](https://github.com/fourkitchens/saucier/blob/master/lib/headless.js)
 
-- Implemented custom methods for handling different types of requests. 
+- Implemented custom methods for handling different types of requests.
   - `routeMulti`, `routeSection`, `routeItem`
   - Each handler is an alias for `handleGet` and can attach additional options.
 - Promises.
@@ -197,7 +197,7 @@ and, your JSON data,
 }
 ```
 
-gives you something like, 
+gives you something like,
 
 ```html
 Famous People
@@ -210,11 +210,11 @@ Famous People
 
 There is a base template at `workspace/node/headless-framework/_src/templates/base_template.dust`. This should be your wrapper. If you're familiar with Sass, then the modularity of Dust will make sense.
 
-Each of your partials should be exporting a _block_, but to render that _block_ we need to let the parent partial know about it. 
+Each of your partials should be exporting a _block_, but to render that _block_ we need to let the parent partial know about it.
 
 > `{+pageContent/}`
 
-The next template we'll create is the actual partial for rendering the blog posts. 
+The next template we'll create is the actual partial for rendering the blog posts.
 
 ```dust
 {>"base_template.dust" title="Posts"/}
@@ -233,7 +233,7 @@ The syntax for loops in dust is pretty simplistic, and it's what you'll probably
 
 {<pageContent}
   {#_embedded.fk_blogposts}
-    
+
   {/_embedded.fk_blogposts}
 {/pageContent}
 ```
