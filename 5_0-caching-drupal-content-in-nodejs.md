@@ -66,7 +66,7 @@ var express = require('express'),
 ```javascript
 app.get('/posts', function (req, res) {
   request({
-    url: 'http://USERNAME.drupal.4kclass.com:8080/api/v1.2/articles',
+    url: 'http://USERNAME.drupal.headless.4kclass.com:8080/api/v1.2/articles',
     json: true
   }, function (error, response, body) {
     return res.send(body);
@@ -74,7 +74,7 @@ app.get('/posts', function (req, res) {
 });
 ```
 
-> Visit [http://localhost:3000/posts](http://localhost:3000/posts)
+> Visit [http://USERNAME.drupal.headless.4kclass.com:PORT/posts](http://USERNAME.drupal.headless.4kclass.com:PORT/posts)
 
 Every time someone makes a request for the `/posts` route, an external data source will be fetched. The `request()` function takes two parameters, an object with some options, and a callback; in the call back is where you can return the data.
 

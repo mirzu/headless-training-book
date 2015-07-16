@@ -51,7 +51,7 @@ To ensure that everything is operating normally run, `npm -v` .
 
 ## Your first Express Application
 
-Lets build a basic express app, with routes, some middleware and a template engine. All this work will take place in the `0-introduction-to-express` folder in the `workspace` directory.
+Lets build a basic express app, with routes, some middleware and a template engine. All this work will take place in the folder `train-headless/workspace/node/introduction-to-express`.
 
 > This directory should empty, except for a `.gitkeep` file.
 
@@ -67,7 +67,7 @@ This utility will walk you through creating a package.json file.
 It only covers the most common items, and tries to guess sensible defaults.
 
 Press ^C at any time to quit.
-name: (0-introduction-to-express)
+name: (introduction-to-express)
 version: (1.0.0)
 description:
 entry point: (index.js) app.js
@@ -130,7 +130,7 @@ app.get('/example', function (req, res) {
 
 Express adds a simple `.send()` method to the response object. This abstracts away most of the boilerplate code to handle responses. We'll look at some more interesting things to send in just a moment.
 
-Start your app with `node app.js`, and visit `http://localhost:3000/example` in your browser.
+Start your app with `node app.js`, and visit `http://USERNAME.drupal.headless.4kclass.com:PORT/example` in your browser.
 
 > Tell me what this matches on, and what it doesn't.
 
@@ -151,6 +151,8 @@ app.get('/api', function (req, res) {
   res.send(model);
 });
 ```
+
+Stop your app with `ctrl+C` and restart with `node app.js` to load this new route.
 
 > Maybe you want to send files.
 
@@ -182,6 +184,7 @@ app.get('/packagejson', function (req, res) {;
 * Require `adaro`.
 
 ```javascript
+var adaro = require('adaro');
 app.set('views', 'views');
 app.engine('dust', adaro.dust({cache: false}));
 app.set('view engine', 'dust');
