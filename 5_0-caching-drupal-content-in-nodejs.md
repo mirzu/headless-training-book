@@ -92,7 +92,7 @@ Store the remote url and our `cacheKey` as variables so they can be reused. Make
 
 ```javascript
 var remote = 'http://USERNAME.drupal.4kclass.com:8080/api/v1.2/articles',
-    cacheKey = crypto.createHash('sha1').update(req.url + port).digest('hex');
+    cacheKey = crypto.createHash('sha1').update(req.url + process.env.PORT).digest('hex');
 ```
 
 - Change the `url` option of _request_ to be the `remote` variable.
@@ -167,4 +167,4 @@ client.get(cacheKey, function (err, reply) {
 - Use a `multi object` to set cached data at it's `ttl`.
 - Create a dust template to render this data.
 - Create an optional route parameter to filter all posts by their id
-  - Change the template for this single post.
+    - Change the template for this single post.

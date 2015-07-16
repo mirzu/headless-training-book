@@ -44,10 +44,10 @@ To ensure that everything is operating normally run, `npm -v` .
 
 * You can run `npm init` to help you scaffold your `package.json` file.
 * For dependencies you can keep `dev` dependencies separate with `--save-dev`.
-  * When deploying use, `npm install --production`.
+    * When deploying use, `npm install --production`.
 * You can use `git` repositories as dependencies.
-  * If you have version `1.1.65` or greater you can use GitHub URLs, `"mocha": "mochajs/mocha"`
-  * [More Information](https://docs.npmjs.com/files/package.json#git-urls-as-dependencies)
+    * If you have version `1.1.65` or greater you can use GitHub URLs, `"mocha": "mochajs/mocha"`
+    * [More Information](https://docs.npmjs.com/files/package.json#git-urls-as-dependencies)
 
 ## Your first Express Application
 
@@ -58,7 +58,7 @@ Lets build a basic express app, with routes, some middleware and a template engi
 ### Setup
 
 * Type `npm init` to get started creating out `package.json` file.
-  *  Most of these options don't matter for this exercise. However the entry point should be `app.js` to be consistent with the finished examples.
+    *  Most of these options don't matter for this exercise. However the entry point should be `app.js` to be consistent with the finished examples.
 
 Your prompt should look very similar to the following (_I've removed some parts_),
 
@@ -160,7 +160,7 @@ Stop your app with `ctrl+C` and restart with `node app.js` to load this new rout
 
 * Require the `path` module
 * Create a route that listens on the `get` HTTP method and serves the `package.json` file.
-  * _This is probably a bad idea in production, so just use this for an example._
+    * _This is probably a bad idea in production, so just use this for an example._
 
 ```javascript
 var path = require('path');
@@ -256,7 +256,7 @@ module.exports = {
 ```
 
 * Create an article template, you can start from `index.dust` for this content.
-  * Dust.JS documentation on looping, [http://www.dustjs.com/guides/getting-started/#looping](http://www.dustjs.com/guides/getting-started/#looping)
+    * Dust.JS documentation on looping, [http://www.dustjs.com/guides/getting-started/#looping](http://www.dustjs.com/guides/getting-started/#looping)
 * Create a route that listens on the `get` HTTP method, uses this article listing template, and renders the new content.
 
 ---
@@ -288,4 +288,4 @@ app.get('/articles', function (req, res) {
 
 * Create an individual article template
 * Create a route which modifies it's output based on a query or route parameter.
-  * Return just a single post matching on `post.id`
+    * Return just a single post matching on `post.id`
