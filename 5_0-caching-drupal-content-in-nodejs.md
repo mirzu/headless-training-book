@@ -20,12 +20,12 @@ Redis is an open source, BSD licensed, advanced key-value cache and store. It is
 * Have a standardized method for creating keys.
 * Figure out early on if you want to cache an item.
 * Redis gives you a few ways to make this happen.
-  * Hashes
-    * Known data structure
-    * Only `get`/`set` what you need (this is something you have to figure out)
-    * Slow
-  * Strings
-    * Serialize & De-serialize on each request.
+    * Hashes
+        * Known data structure
+        * Only `get`/`set` what you need (this is something you have to figure out)
+        * Slow
+    * Strings
+      * Serialize & De-serialize on each request.
 
 Always check your cache. Drupal is slow, and you'll want to avoid making a network round-trip if you can.
 
