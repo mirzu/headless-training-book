@@ -30,8 +30,8 @@
 
 - Create an `./config/env.json` file. A template is located at, `./config/_env.json`
 - Ensure the `local` environment in `./config/env.json` is populated with
-  - The API endpoint you want to operate against.
-  - The Redis instance you want to get/set information from.
+    - The API endpoint you want to operate against.
+    - The Redis instance you want to get/set information from.
 - Create an `./config/_secrets.json` file. A template is located at, `./config/secrets.json`.
 - Populate the `./config/secrets.json` file.
 
@@ -156,14 +156,14 @@ var handleGet         = function (route, template, options) {
 > [headless.js](https://github.com/fourkitchens/saucier/blob/master/lib/headless.js)
 
 - Implemented custom methods for handling different types of requests.
-  - `routeMulti`, `routeSection`, `routeItem`
-  - Each handler is an alias for `handleGet` and can attach additional options.
+    - `routeMulti`, `routeSection`, `routeItem`
+    - Each handler is an alias for `handleGet` and can attach additional options.
 - Promises.
 - `.then()`
 - Handlers
-  - Cache
-  - API
-  - Rendering
+    - Cache
+    - API
+    - Rendering
 
 ### Templates and Rendering
 
@@ -267,7 +267,7 @@ You may have noticed, `.then(render.parse)`. This is where the actual JSON is fo
 
 - Last step
 - Any engine that supports `.render()` could be plugged in.
-  - No dependencies on `DustJS`
+    - No dependencies on `DustJS`
 - Only return HTML.
 
 ```javascript

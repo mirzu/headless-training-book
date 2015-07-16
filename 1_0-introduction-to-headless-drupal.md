@@ -1,10 +1,10 @@
 # 1 Introduction to Headless Drupal
 ## Outline
 - When to go Headless
-  - Speed of Development
-  - Separation of teams/resources
-  - Same data, lots of different consumers
-  - Architecture Patterns
+    - Speed of Development
+    - Separation of teams/resources
+    - Same data, lots of different consumers
+    - Architecture Patterns
 - Architecture Patterns for Decoupled sites.
 
 ## When to go Headless
@@ -18,22 +18,22 @@
 
 ### Same data, lots of different consumers
 - Building one backend that will be consumed with many different systems.
-  - [TWiT.tv](http://fourword.fourkitchens.com/article/twittv-launches-content-api-and-headless-drupal-site)
-  - [Tonight Show with Jimmy Fallon](http://fourword.fourkitchens.com/article/and-emmy-goes)
-    - [DrupalCon Austin Session on TSwJF Architecture](https://www.youtube.com/watch?v=oxGfkTgxp6M)
+    - [TWiT.tv](http://fourword.fourkitchens.com/article/twittv-launches-content-api-and-headless-drupal-site)
+    - [Tonight Show with Jimmy Fallon](http://fourword.fourkitchens.com/article/and-emmy-goes)
+        - [DrupalCon Austin Session on TSwJF Architecture](https://www.youtube.com/watch?v=oxGfkTgxp6M)
 - Separation of concerns
 - When the the Drupal presentation layer is getting in your way.
 
 ## Architecture Patterns for Decoupled sites.
 ### Architecture parts
 - Routing
-  - Clean URLs
+    - Clean URLs
 - Caching
 - Templating
 - Error Handling
 - Interactivity
 - Authentication
-  - Permissions
+    - Permissions
 - API Versioning strategy & implementation
 - API Documentation strategy & implementation
 

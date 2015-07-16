@@ -6,10 +6,10 @@ REST: Everyone has heard about it, but not everyone has the same definition. It'
 
 ## Outline
 * API terms
-  * REST
-  * HTTP Methods (Verbs)
-  * HTTP Status Codes
-  * Media Type
+    * REST
+    * HTTP Methods (Verbs)
+    * HTTP Status Codes
+    * Media Type
 
 ## REST
 Set of guidelines that define best practices for making an API. REST is not a formal specification, but rather a set of principles that guide API design, making your API work like the World Wide Web.

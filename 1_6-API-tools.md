@@ -2,16 +2,16 @@
 
 ## Outline
 * Chrome Extensions
-  * JSONView -> insert anchor links to lower sections
-  * POSTMAN
+    * JSONView -> insert anchor links to lower sections
+    * POSTMAN
 * Command line tools
-  * curl
-  * resty
+    * curl
+    * resty
 * Online tools
-  * [Apiary](https://apiary.io/) - An API Documentation Tool
-  * [Swagger](http://swagger.io/) - API Documentation and Editing Tools
-  * [Runscope](https://www.runscope.com/) - An API Monitoring Tool, useful for CI
-  * [MuleSoft](https://www.mulesoft.com/) - An API Services company, providing design, monitoring, and training services and resources
+    * [Apiary](https://apiary.io/) - An API Documentation Tool
+    * [Swagger](http://swagger.io/) - API Documentation and Editing Tools
+    * [Runscope](https://www.runscope.com/) - An API Monitoring Tool, useful for CI
+    * [MuleSoft](https://www.mulesoft.com/) - An API Services company, providing design, monitoring, and training services and resources
 
 ## Chrome Extensions
 ###  [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en)

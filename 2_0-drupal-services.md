@@ -2,48 +2,48 @@
 ## Drupal Web Services
 ### Outline
 - Module Options
-  - Why Restful
+    - Why Restful
 - Install & configure Restful
 - Create Endpoints
-  - Single node endpoint
-  - Node collection endpoint
-    - Filtering content
-  - Referenced content (node author)
-  - Handling Media
-  - Queued Content
+    - Single node endpoint
+    - Node collection endpoint
+        - Filtering content
+    - Referenced content (node author)
+    - Handling Media
+    - Queued Content
 - Hypermedia API Design in practice
-  - Apiary for mocking & Docs.
-  - Mocking in Drupal directly.
+    - Apiary for mocking & Docs.
+    - Mocking in Drupal directly.
 - Drupal Overview
 
 ### Different Module Options
 - Services
-  - Oldest module
-  - Good architecture for setting up servers
-  - Handles different servers becides REST
-  - Horrible default Entity endpoints
-  - Custom endpoint creation is not intuitive and hard to work with
+    - Oldest module
+    - Good architecture for setting up servers
+    - Handles different servers becides REST
+    - Horrible default Entity endpoints
+    - Custom endpoint creation is not intuitive and hard to work with
 
 
 - RESTws
-  - Not a bad option overall
-  - Custom endpoint creation is OK
-  - Less robust server implementation
-  - Doesn't do versioning
+    - Not a bad option overall
+    - Custom endpoint creation is OK
+    - Less robust server implementation
+    - Doesn't do versioning
 
 
 - RESTful
-  - The module we are using for this class
-  - Very good API for creating endpoints
-  - Very well written.
-  - No default endpoints
-  - Designed from the ground up to create beautiful APIs
+    - The module we are using for this class
+    - Very good API for creating endpoints
+    - Very well written.
+    - No default endpoints
+    - Designed from the ground up to create beautiful APIs
 
 ## Intro to Restful
 > This module allows Drupal to be operated via RESTful HTTP requests, using best practices for security, performance, and usability.
 
 - All endpoints are explicitly created. The module does nothing by default.
-  - This allows for clean output and keeps _Drupalisms_ from leaking out into your API
+    - This allows for clean output and keeps _Drupalisms_ from leaking out into your API
 - Versioning is core to how endpoints are built
 - Endpoints are built around bundles, not entity types, making it easy to expose certain endpoints, but not others.
 - Configurable output formats allowing for output in JSON or XML
