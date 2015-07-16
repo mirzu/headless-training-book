@@ -359,7 +359,7 @@ Let's wrap up by putting this latest work into our git repository.
 
 `git add .`
 
-`git commit -am "end of lesson2"`
+`git commit -am "end of lesson3"`
 
 #### Extra Credit
 
