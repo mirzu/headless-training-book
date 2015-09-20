@@ -45,7 +45,6 @@
 
 ## You don't have to take down your existing Drupal site!
 You can add an API to your existing Drupal site and use it as a superset of the existing functionality.
-For a deeper look into this topic, maybe check out my talk this weekend, [Nearly Headless Drupal](http://nyccamp.org/session/nearly-headless-drupal)!
 
 ## Real world Examples
 - [The Tonight Show Starring Jimmy Fallon](http://www.nbc.com/the-tonight-show) (Node.js + Backbone.js): / [DrupalCon case study](https://austin2014.drupal.org/session/migrating-worlds-largest-website-drupal-weathercom) /via @vordude
