@@ -124,13 +124,13 @@ Let's add a few simple routes to the application. Express can respond to various
 
 ```javascript
 app.get('/example', function (req, res) {
-    res.send('Welcome to NYC Camp.');
+    res.send('Welcome to DrupalCon Barcelona.');
 });
 ```
 
 Express adds a simple `.send()` method to the response object. This abstracts away most of the boilerplate code to handle responses. We'll look at some more interesting things to send in just a moment.
 
-Start your app with `node app.js`, and visit `http://USERNAME.drupal.headless.4kclass.com:PORT/example` in your browser.
+Start your app with `node app.js`, and visit `http://USERNAME.dcbarcelona.4kclass.com:PORT/example` in your browser.
 
 > Tell me what this matches on, and what it doesn't.
 
@@ -207,10 +207,10 @@ app.set('view engine', 'dust');
 ```html
 <html>
   <head>
-    <title>WELCOME TO NYC Camp</title>
+    <title>WELCOME TO DrpalCon Barcelona</title>
   </head>
   <body>
-    <h1>{name}, welcome to NYC Camp.</h1>
+    <h1>{name}, welcome to DrpalCon Barcelona.</h1>
     <h2>Check out my sweet blog.</h2>
   </body>
 </html>
@@ -241,15 +241,15 @@ module.exports = {
   posts: [
     {
       'id': 1,
-      'title': 'Welcome to NYC Camp',
-      'body': 'This is the first entry in my NYC Camp travel log.',
-      'published': '7/16/2015'
+      'title': 'Welcome to DrpalCon Barcelona',
+      'body': 'This is the first entry in my DrpalCon Barcelona travel log.',
+      'published': '9/20/2015'
     },
     {
       'id': 2,
-      'title': 'NYC Camp is over.',
-      'body': 'On my way home from NYC Camp',
-      'published': '7/19/2015'
+      'title': 'DrpalCon Barcelona is over.',
+      'body': 'On my way home from DrpalCon Barcelona.',
+      'published': '9/27/2015'
     }
   ]
 }
@@ -270,10 +270,10 @@ app.get('/articles', function (req, res) {
 ```html
 <html>
   <head>
-    <title>Articles from NYC Camp</title>
+    <title>Articles from DrpalCon Barcelona</title>
   </head>
   <body>
-    <h1>{name}, welcome to NYC Camp.</h1>
+    <h1>{name}, welcome to DrpalCon Barcelona.</h1>
     <h2>Check out my sweet blog.</h2>
     {#posts}
       <h3><a href="/article/{id}">{title}</a></h3>
