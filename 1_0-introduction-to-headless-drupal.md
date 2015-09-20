@@ -38,8 +38,6 @@
 - API Documentation strategy & implementation
 
 ### Patterns
-For an in depth look at these topics you should check out Mike Minecki's talk this weekend, [Headless Drupal Architecture Patterns](http://nyccamp.org/session/headless-drupal-architecture-patterns)
-
 - Cache & Theme
 - Client Side templating
 - Static Site Generator
