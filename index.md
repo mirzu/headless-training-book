@@ -1,4 +1,4 @@
-# Headless Drupal Training - NYC Camp 2015
+# Headless Drupal Training - DrupalCon Barcelona 2015
 ## About the training
 Do you want to manage content in Drupal but use something else to deliver it to your users? This is the class for you.
 
@@ -11,5 +11,5 @@ You will write code all day! By the end, you'll have written your first Node.js 
 Patrick is an engineer in Austin TX. He stays busy writing web based applications for Four Kitchens. In his spare time I work on open source projects.
 Patrick likes JavaScript, Go, Meteor, Drupal, Linux, and Vim. He enjoys writing clean, clear solutions to interesting problems. Other random interests include playing instruments, drinking beer, running/hiking, backpacking, and hanging out with friends in ATX.
 
-### Dustin Younse, Engineer at Four Kitchens
-Dustin, a former 4th grade LOGO Programming champion, discovered View Source in 1997, and has been making websites ever since. He has a long time obsession with making computer interfaces more human friendly, rather than expecting humans to become more computer friendly.
+### Matthew Grill, Engineer at Four Kitchens
+Matt taught himself HTML in 1996 while making a fan site for The Simpsons, even though he’s never actually watched the show. Matt’s interests in technology range from Arduino to automation and deployment. He is currently focused on automating accessible and scalable solutions for Drupal, with a passion for all things JavaScript, maps and mapping large datasets.
