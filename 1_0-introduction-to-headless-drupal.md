@@ -42,7 +42,6 @@
 - Client Side templating
 - Static Site Generator
 - Drupal to Drupal
-- Isomorphic Frameworks
 
 ## You don't have to take down your existing Drupal site!
 You can add an API to your existing Drupal site and use it as a superset of the existing functionality.
