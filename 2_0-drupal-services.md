@@ -121,6 +121,8 @@ $plugin = array(
     'name' => 'default',
     'field_map' => array(
       'body' => 'body',
+      'field_lead_image' => 'image',
+      'field_blog_categories_term_tree' => 'categories'
     ),
   ),
 );
