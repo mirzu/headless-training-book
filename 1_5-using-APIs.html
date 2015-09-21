@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>1.5 What exactly is a REST API? | Headless Training Book</title>
+
+    <!-- Styles and fonts -->
+    <link href="themes/epsilon/stylesheets/epsilon.css" rel="stylesheet" type="text/css" />
+    <link href="themes/epsilon/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
+    <link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700|Noticia+Text:400,400italic,700,700italic&subset=latin,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <script src="themes/epsilon/javascripts/modernizr.js" type="text/javascript"></script>
+  </head>
+
+  <body class="x1_5-using-APIs epsilon">
+    <div class="page-wrapper">
+
+      <a id="menu-toggle" class="menu-toggle" href="#sidr"><span class="bitcon-list"></span><span class="menu-toggle-text">Toggle Menu</span></a>
+      <header class="page-header" role="banner">
+<a class="invisilink" href="./">            <span class="book-title">Headless Training Book</span>
+</a>        <span class="book-author">by Michal Minecki</span>
+      </header>
+
+        <div class="content-wrapper clearfix">
+
+          <!--[if lt IE 7]>
+              <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+          <![endif]-->
+
+          <section class="main-content" role="main">
+            <div class="main-content-source">
+              <h1>1.5 What exactly is a REST API?</h1>
+
+<p>REST: Everyone has heard about it, but not everyone has the same definition. It&rsquo;s become synonymous with the idea of a &ldquo;web API,&rdquo; but it&rsquo;s real meaning is quite a bit more specific.</p>
+
+<blockquote>
+<p>In short it&rsquo;s a web API that is designed to work like the WWW.</p>
+</blockquote>
+
+<h2>Outline</h2>
+
+<ul>
+<li>API terms
+
+<ul>
+<li>REST</li>
+<li>HTTP Methods (Verbs)</li>
+<li>HTTP Status Codes</li>
+<li>Media Type</li>
+</ul></li>
+</ul>
+
+<h2>REST</h2>
+
+<p>Set of guidelines that define best practices for making an API. REST is not a formal specification, but rather a set of principles that guide API design, making your API work like the World Wide Web.</p>
+
+<blockquote>
+<p>From <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">wikipedia</a> Representational state transfer, an architectural style consisting of guidelines for creating scaleable web services.</p>
+</blockquote>
+
+<p>If an API is following the REST principles it should have the following aspects:</p>
+
+<ol>
+<li>base <a href="http://en.wikipedia.org/wiki/URI">URI</a>, such as <a href="http://example.com/resources/">http://example.com/resources/</a></li>
+<li>an <a href="http://en.wikipedia.org/wiki/Internet_media_type">Internet media type</a> for the data. This is often JSON but can be any other valid Internet media type (e.g. XML, Atom, microformats, images, etc.)</li>
+<li>Use standard <a href="http://en.wikipedia.org/wiki/HTTP_method">HTTP methods</a> (e.g., GET, PUT, POST, or DELETE)</li>
+<li>hypertext links to reference state</li>
+<li>hypertext links to reference related resources</li>
+</ol>
+
+<p><a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">The Academic Roots of REST API Guidelines</a></p>
+
+<h2>HTTP Methods</h2>
+
+<p>Define the desired action to be used when accessing a resource. You are likely familiar with GET and POST, but there are also:
+HEAD, OPTIONS, PUT, DELETE, TRACE and CONNECT.</p>
+
+<h3>Safe and UnSafe Methods.</h3>
+
+<p>Safe methods are, by convention: GET, HEAD, OPTIONS and TRACE. Accessing with these methods will not change the state of the application.</p>
+
+<p>By contrast, methods such as POST, PUT, DELETE and PATCH are intended for actions that may cause side effects either on the server.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">more info</a></p>
+
+<h2>Media Type</h2>
+
+<p>The <a href="http://en.wikipedia.org/wiki/Internet_media_type">Internet media type</a> identifies the type of data the file contains. HTML pages will have the media type <code>text/HTML</code> and most of the APIs you use will be <code>application/json</code>. Some might use <code>application/xml</code> - I&rsquo;m sorry.</p>
+
+            </div>
+            <nav class="main-content-nav clearfix" role="navigation">
+              <ul>
+                <li><a class="previous" href="1_0-introduction-to-headless-drupal.html">Previous</a></li>
+                <li><a class="next" href="1_6-API-tools.html">Next</a></li>
+              </ul>
+            </nav>
+          </section>
+
+          <aside id="sidr" class="aside-content" role="complementary">
+            <div class="aside-wrapper">
+
+              <div class="block table-of-contents">
+                <h3>Table of Contents</h3>
+                <nav role="navigation">
+                  <ul>
+                    <li class='child '><a href="./">Headless Drupal Training - DrupalCon Barcelona 2015</a></li><li class='child '><a href="1_0-introduction-to-headless-drupal.html">1 Introduction to Headless Drupal</a></li><li class='child active'><a href="1_5-using-APIs.html">1.5 What exactly is a REST API?</a></li><li class='child '><a href="1_6-API-tools.html">1.6 API Tools</a></li><li class='child '><a href="2_0-drupal-services.html">2 Drupal Services</a></li><li class='child '><a href="2_1-API-Best-Practices.html">2.1 API Best Practices</a></li><li class='child '><a href="3_0-intro-to-nodejs.html">3 Intro to Node.js</a></li><li class='child '><a href="4_0-introduction-to-express.html">4 Intro to ExpressJS</a></li><li class='child '><a href="5_0-caching-drupal-content-in-nodejs.html">5 Caching Drupal Content in Node.js</a></li><li class='child '><a href="6_0-reference-implementation.html">6 Reference implementation introduction</a></li><li class='child '><a href="7_0-headless-ahas.html">7 Headless A-ha&rsquo;s</a></li><li class='child '><a href="8_0-strategies-for-user-generated-content.html">8 Strategies for User Generated Content</a></li>
+                  </ul>
+                </nav>
+              </div>
+
+              <div class="block open-source">
+                <h3>This book is open source</h3>
+                <p>The source of this book is <a href="https://github.com/mirzu/headless-training-book">hosted on Github</a>. Go, ahead. Check it out.</p>
+              </div>
+
+              <!--
+              <div class="block downloads">
+                <h3>Downloads</h3>
+                <p>Download this book in
+                    <a href="#">PDF</a>, <a href="#">mobi</a>, and <a href="#">epub</a>
+                  form for free.
+                </p>
+              </div>
+
+              <div class="block translations">
+                <h3>Book translations</h3>
+                <p>This book is translated into
+                  <a href="#">Spanish</a>
+                  and <a href="#">English</a>.
+                  You can help with more translations <a href="https://github.com/mirzu/headless-training-book">on Github</a>.
+                </p>
+              </div>
+              -->
+
+              <div class="block license">
+                <h3>License</h3>
+                <p>This book is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0">Attribution-NonCommercial-ShareAlike</a> license.</p>
+              </div>
+
+            </div><!-- end aside-wrapper -->
+          </aside>
+
+        </div><!-- end content-wrapper -->
+
+      <footer class="page-footer">
+        <div class="footer-wrapper">
+          <small class="small-text">Made with <a href="http://bitbooks.cc">Bitbooks</a></small>
+        </div><!-- end footer-wrapper -->
+      </footer>
+
+    </div><!-- end page-wrapper -->
+
+    <!-- include scripts just before the close of the body tag -->
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="themes/epsilon/javascripts/jquery.sidr.min.js" type="text/javascript"></script>
+    <script src="themes/epsilon/javascripts/anchor.min.js" type="text/javascript"></script>
+    <script src="themes/epsilon/javascripts/epsilon.js" type="text/javascript"></script>
+  </body>
+</html>

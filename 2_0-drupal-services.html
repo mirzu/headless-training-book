@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>2 Drupal Services | Headless Training Book</title>
+
+    <!-- Styles and fonts -->
+    <link href="themes/epsilon/stylesheets/epsilon.css" rel="stylesheet" type="text/css" />
+    <link href="themes/epsilon/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
+    <link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700|Noticia+Text:400,400italic,700,700italic&subset=latin,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <script src="themes/epsilon/javascripts/modernizr.js" type="text/javascript"></script>
+  </head>
+
+  <body class="x2_0-drupal-services epsilon">
+    <div class="page-wrapper">
+
+      <a id="menu-toggle" class="menu-toggle" href="#sidr"><span class="bitcon-list"></span><span class="menu-toggle-text">Toggle Menu</span></a>
+      <header class="page-header" role="banner">
+<a class="invisilink" href="./">            <span class="book-title">Headless Training Book</span>
+</a>        <span class="book-author">by Michal Minecki</span>
+      </header>
+
+        <div class="content-wrapper clearfix">
+
+          <!--[if lt IE 7]>
+              <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+          <![endif]-->
+
+          <section class="main-content" role="main">
+            <div class="main-content-source">
+              <h1>2 Drupal Services</h1>
+
+<h2>Drupal Web Services</h2>
+
+<h3>Outline</h3>
+
+<ul>
+<li>Module Options
+
+<ul>
+<li>Why Restful</li>
+</ul></li>
+<li>Install &amp; configure Restful</li>
+<li>Create Endpoints
+
+<ul>
+<li>Single node endpoint</li>
+<li>Node collection endpoint
+
+<ul>
+<li>Filtering content</li>
+</ul></li>
+<li>Referenced content (node author)</li>
+<li>Handling Media</li>
+<li>Queued Content</li>
+</ul></li>
+<li>Hypermedia API Design in practice
+
+<ul>
+<li>Apiary for mocking &amp; Docs.</li>
+<li>Mocking in Drupal directly.</li>
+</ul></li>
+<li>Drupal Overview</li>
+</ul>
+
+<h3>Different Module Options</h3>
+
+<ul>
+<li><p>Services</p>
+
+<ul>
+<li>Oldest module</li>
+<li>Good architecture for setting up servers</li>
+<li>Handles different servers becides REST</li>
+<li>Horrible default Entity endpoints</li>
+<li>Custom endpoint creation is not intuitive and hard to work with</li>
+</ul></li>
+<li><p>RESTws</p>
+
+<ul>
+<li>Not a bad option overall</li>
+<li>Custom endpoint creation is OK</li>
+<li>Less robust server implementation</li>
+<li>Doesn&rsquo;t do versioning</li>
+</ul></li>
+<li><p>RESTful</p>
+
+<ul>
+<li>The module we are using for this class</li>
+<li>Very good API for creating endpoints</li>
+<li>Very well written.</li>
+<li>No default endpoints</li>
+<li>Designed from the ground up to create beautiful APIs</li>
+</ul></li>
+</ul>
+
+<h2>Intro to Restful</h2>
+
+<blockquote>
+<p>This module allows Drupal to be operated via RESTful HTTP requests, using best practices for security, performance, and usability.</p>
+</blockquote>
+
+<ul>
+<li>All endpoints are explicitly created. The module does nothing by default.
+
+<ul>
+<li>This allows for clean output and keeps <em>Drupalisms</em> from leaking out into your API</li>
+</ul></li>
+<li>Versioning is core to how endpoints are built</li>
+<li>Endpoints are built around bundles, not entity types, making it easy to expose certain endpoints, but not others.</li>
+<li>Configurable output formats allowing for output in JSON or XML</li>
+<li>Object oriented architecture that makes it easy to created endpoints and reuse code.</li>
+<li>Very good test coverage in the module.</li>
+</ul>
+
+<h2>Structure of our content</h2>
+
+<p>The content we&rsquo;ll be working with is populated with posts from the four kitchens blog. Below is a list of the fields that we&rsquo;ll be working with for easier reference. The login to your Database is admin:admin.</p>
+
+<table><thead>
+<tr>
+<th>Field Label</th>
+<th>Machine Name</th>
+<th>Field Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Lead image</td>
+<td>field_lead_image</td>
+<td>Image</td>
+<td></td>
+</tr>
+<tr>
+<td>Body</td>
+<td>body</td>
+<td>Long Text</td>
+<td></td>
+</tr>
+<tr>
+<td>Inline Images</td>
+<td>field_inline_image</td>
+<td>Image</td>
+<td></td>
+</tr>
+<tr>
+<td>Files</td>
+<td>field_blog_files</td>
+<td>File</td>
+<td></td>
+</tr>
+<tr>
+<td>Blog Categories</td>
+<td>field_blog_categories_term_tree</td>
+<td>Term reference</td>
+<td></td>
+</tr>
+<tr>
+<td>Blog Series</td>
+<td>field_blog_series_term_tree</td>
+<td>Term reference</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2>Install and Configure Restful</h2>
+
+<p>The module is already installed. The only dependency is the <a href="https://drupal.org/project/entity">Entity API</a> module. There is one <a href="https://www.drupal.org/node/2086225#comment-9627407">patch</a> to the Entity API module required.</p>
+
+<p>Once the module is installed there is no exposed admin page. You need to create your own module that declares a Restful plugin to use the module.</p>
+
+<p>Lets do that now!</p>
+
+<h2>Custom Module was created for you.</h2>
+
+<p>We skipped the normal setup of a Drupal module, including creating the .info file and in the module folder we declared where ctools should look for restful plugins. The &lsquo;plugins/&rsquo; folder in this module.</p>
+
+<p><code>restful_fourword/restful_fourword.module</code></p>
+<pre class="highlight plaintext">&lt;?php
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+ function restful_fourword_ctools_plugin_directory($module, $plugin) {
+   if ($module == 'restful') {
+     return 'plugins/' . $plugin;
+   }
+ }
+</pre>
+
+<h2>How the Drupal Lessons are setup.</h2>
+
+<p>The custom module is already created and you can start working with it. The repo for it has Git tags for each lesson. You can always see what the end result of a lesson is and check if you are on the righ track by using a simple diff command.</p>
+
+<h3>Checkout the first tag.</h3>
+
+<p>To get started checkout a branch that is based on the lesson_1_start tag.</p>
+
+<p><code>git checkout -b lesson1 lesson_1_start</code></p>
+
+<p>You can now make changes to your code. To compare your code to the end of the lesson use the following command:</p>
+
+<p><code>git diff lesson_1_end</code></p>
+
+<p>As you can see we are going to add a file &ldquo;plugins/restful/node/blog_posts/1.0/blogPosts__1_0.inc&rdquo;</p>
+
+<p>Lets get started.</p>
+
+<h3>1. Declare an endpoint for blog posts.</h3>
+
+<p><code>restful_fourword/plugins/restful/node/blog_posts/1.0/blogPosts__1_0.inc</code></p>
+<pre class="highlight plaintext">&lt;?php
+$plugin = array(
+  'label' =&gt; t('Blog Posts'),
+  'resource' =&gt; 'articles',
+  'name' =&gt; 'blogPosts__1_0',
+  'entity_type' =&gt; 'node',
+  'bundle' =&gt; 'blog_post',
+  'description' =&gt; t('Fourword blog posts using view modes'),
+  'class' =&gt; 'RestfulEntityBaseNode',
+  'authentication_types' =&gt; TRUE,
+  'authentication_optional' =&gt; TRUE,
+  'view_mode' =&gt; array(
+    'name' =&gt; 'default',
+    'field_map' =&gt; array(
+      'body' =&gt; 'body',
+      'field_lead_image' =&gt; 'image',
+      'field_blog_categories_term_tree' =&gt; 'categories'
+    ),
+  ),
+);
+</pre>
+
+<p>The resource key determines the root URL of the resource. The name key must match the filename of the plugin: in this case, the name is <code>blogPosts__1_0</code>, and therefore, the filename is <code>blogPosts__1_0.inc</code>.</p>
+
+<p>This endpoint is created using the default view mode, and exposes any fields that are listed in the <code>field_map</code> array. <em>Note:</em> Fields must be visible in the view mode for them to show up.</p>
+
+<p>Lets talk about the different parts of the array.</p>
+
+<ul>
+<li><code>label</code> - The label of the plugin.</li>
+<li><code>resource</code> - Name of the <em>resource</em>, must match the filename of the plugin.</li>
+<li><code>name</code> - Machine name of the plugin.</li>
+<li><code>entity_type</code> - Type of Entity this resource will expose.</li>
+<li><code>bundle</code> - Name of the bundle this resource will expose.</li>
+<li><code>description</code> - Longer description of the plugin.</li>
+<li><code>class</code> - Class file that will declare the plugin.</li>
+<li><code>authentication_types</code> - What type of authentication this plugin will use.</li>
+<li><code>authentication_optional</code> - Determines if the authentication is required.</li>
+<li><code>minor_version</code> - Minor version of the API that this plugin will be exposed under.</li>
+<li><code>view_mode</code> - Array with info about the view mode to use for this endpoint.</li>
+</ul>
+
+<h3>1.1 All the stuff you can do now!</h3>
+
+<p>RESTful comes with a bunch of out of the box functionality for any resource that you create. Including:
+- See a paginated list of blog posts, and use hyper links to go to different pages: <code>api/articles</code>
+- Get a specific blog post: <code>api/articles/29,143</code>
+- Limit the fields returned using the <em>fields=</em> query parameter <code>api/articles/29?fields=body</code>
+- Filter the API using the <em>filter[lable]=</em> query parameter.
+- More info on consuming the API is in (this file)[<a href="https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/docs/api_url.html">https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/docs/api_url.md</a>].</p>
+
+<h3>1.2 Error Handling</h3>
+
+<p>If an error occurs when operating the REST endpoint via URL, A valid JSON object with <code>code</code>, <code>message</code> and <code>description</code> would be returned.</p>
+
+<p>The RESTful module adheres to the <a href="http://tools.ietf.org/html/draft-nottingham-http-problem-06">Problem Details for HTTP APIs</a> draft to improve DX when dealing with HTTP API errors.</p>
+
+<p>For example, trying to sort a list by an invalid key</p>
+<pre class="highlight shell">curl http://finished.drupal.headless.4kclass.com:8080/api/articles?sort<span class="o">=</span>wrong_key
+</pre>
+
+<p>Will result with an HTTP code 400, and the following JSON:</p>
+<pre class="highlight javascript"><span class="p">{</span>
+  <span class="s1">'type'</span> <span class="o">=&gt;</span> <span class="s1">'http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1'</span><span class="p">,</span>
+  <span class="s1">'title'</span> <span class="o">=&gt;</span> <span class="s1">'The sort wrong_key is not allowed for this path.'</span><span class="p">,</span>
+  <span class="s1">'status'</span> <span class="o">=&gt;</span> <span class="mi">400</span><span class="p">,</span>
+  <span class="s1">'detail'</span> <span class="o">=&gt;</span> <span class="s1">'Bad Request.'</span><span class="p">,</span>
+<span class="p">}</span>
+</pre>
+
+<h3>1.3 Add categories.</h3>
+
+<p>Add a new key to the <code>view_modes</code> key that is <code>field_blog_categories_term_tree</code> with a value of <code>categories</code>. Go to the interface and add the blog categories to the default view mode.</p>
+
+<p>This isn&rsquo;t output isn&rsquo;t great. The HTML surrounding the categories is going to make life hard for our API consumers. We could install (Display Suite)[<a href="https://www.drupal.org/project/ds">https://www.drupal.org/project/ds</a>], but even with those tools we are going to hit a wall sometime or another. Lets try creating a more custom endpoint instead.</p>
+
+<h3>2.0 Versioning your API.</h3>
+
+<p><code>git add .</code></p>
+
+<p><code>git commit -am &quot;end of lesson1&quot;</code></p>
+
+<p><code>git checkout -b lesson2 lesson_2_start</code></p>
+
+<p>Lets create a new version of our API. Once your API is published to the world it&rsquo;s important to be diligent about versioning. There is nothing worse than having your site broken by an API that changed. OK, having your site broken on a <em>Friday</em> by a broken API is worse.</p>
+
+<p>Luckily RESTful is built from the ground up to facilitate easy versioning.</p>
+
+<ul>
+<li>Copy the 1.0 folder to a 1.1 folder.</li>
+<li>Rename the <code>blogPosts__1_0.inc</code> file to <code>blogPosts__1_1.inc</code></li>
+<li>Add a <code>minor_version</code> key with a value of 1 to the plugin definition.</li>
+<li>Clear the cache <code>drush cc all</code></li>
+<li>Visit the new version <code>/api/v1.1/articles</code></li>
+</ul>
+
+<h4>Accessing different API versions in RESTful.</h4>
+
+<p>You can access different versions of the API using two different methods.</p>
+
+<ol>
+<li>Using the URL. Simply replace the <code>v1.1</code> with <code>v1.0</code>.</li>
+<li>Using a header.</li>
+</ol>
+<pre class="highlight shell">curl http://finished.drupal.headless.4kclass.com:8080/api/articles <span class="se">\</span>
+-H <span class="s2">"X-API-Version: v1.0"</span>
+</pre>
+
+<p>The URL is useful for humans, but the header is useful for building API clients.</p>
+
+<h3>3.0 Create a custom endpoint.</h3>
+
+<p>Using the view modes is fine, but the real power of Restful comes from creating custom endpoints. We&rsquo;ll make one now. You can save your work in this branch and create a new branch from the lesson 2 starting point.</p>
+
+<p><code>git add .</code></p>
+
+<p><code>git commit -am &quot;end of lesson2&quot;</code></p>
+
+<p><code>git checkout -b lesson3 lesson_3_start</code></p>
+
+<h4>3.1 Start by creating a new API endpoint version.</h4>
+
+<ul>
+<li>Copy the 1.1 folder to a 1.2 folder.</li>
+<li>Rename the <code>blogPosts__1_1.inc</code> file to <code>blogPosts__1_2.inc</code></li>
+<li>Add a <code>minor_version</code> key with a value of 2 to the plugin definition.</li>
+<li>Add the following class to</li>
+</ul>
+
+<p><code>blogPosts__1_2.inc</code></p>
+<pre class="highlight plaintext">/**
+ * @file
+ * Contains RestfulFourwordBlogPostsResource__1_2.
+ */
+
+class RestfulFourwordBlogPostsResource__1_2 extends RestfulEntityBaseNode {
+  public function publicFieldsInfo() {
+    $public_fields = parent::publicFieldsInfo();
+
+    $public_fields['body'] = array(
+      'property' =&gt; 'body',
+      'sub_property' =&gt; 'value',
+    );
+
+    return $public_fields;
+  }
+}
+</pre>
+
+<p>In the plugin definition, the <code>class</code> value to <code>RestfulFourwordBlogPostsResource__1_2</code>.</p>
+<pre class="highlight php">  'class' =&gt; 'RestfulFourwordBlogPostsResource__1_2',
+</pre>
+
+<p>Finally, remove the <code>view_mode</code> key; it&rsquo;s no longer needed with the class! The final result:</p>
+<pre class="highlight plaintext">$plugin = array(
+  'label' =&gt; t('Blog Posts'),
+  'resource' =&gt; 'articles',
+  'name' =&gt; 'blogPosts__1_2',
+  'entity_type' =&gt; 'node',
+  'bundle' =&gt; 'article',
+  'description' =&gt; t('Fourword blog posts using view modes'),
+  'class' =&gt; 'RestfulFourwordBlogPostsResource__1_2',
+  'authentication_types' =&gt; TRUE,
+  'authentication_optional' =&gt; TRUE,
+  'minor_version' =&gt; 2,
+);
+</pre>
+
+<p>This is all the code you need to create your new endpoint.</p>
+
+<ul>
+<li>Clear the cache <code>drush cc all</code></li>
+<li>Visit the endpoint, which will be available at <code>/api/v1.2/articles</code></li>
+</ul>
+
+<p>It does the following:</p>
+
+<ul>
+<li>This extends the class <code>RestfulEntityBaseNode</code>. This is a convience class that makes working with entities easier. If you wanted to create an endpoint that exposed something else you would use a different base class.</li>
+<li>Creates a public function <code>publicFieldsInfo()</code>.</li>
+<li>In that function creates a variable called <code>$public_fields</code> populated with the parent&rsquo;s <code>publicFieldsInfo()</code></li>
+<li>Adds a new field called body and sets the body to the value of the nodes body field.</li>
+</ul>
+
+<h3>4.0 Add categories to the endpoint.</h3>
+
+<p>The same technique can be used to add any text or numerical fields as properties to your API, but what if you want to add links to other resources? For example lets say we created and endpoint that is for categories, and wanted to link to all the categories that each blog post has?</p>
+
+<p>Hey look at that someone created a categories endpoint for us: <code>/api/articles</code>. Open up the folder and take quick look, we didn&rsquo;t need to do anything besides declare the class.</p>
+
+<h4>Add the categories property.</h4>
+
+<p>Add the following after the body property. This will create a link to the blog categories which is a link to the <code>articles</code> endpoint.</p>
+<pre class="highlight plaintext">$public_fields['categories'] = array(
+  'property' =&gt; 'field_blog_categories_term_tree',
+  'resource' =&gt; array(
+    'blog_categories' =&gt; 'blog_categories',
+  ),
+);
+</pre>
+
+<h3>5.0 Adding an image.</h3>
+
+<h4>Add a property for the image.</h4>
+<pre class="highlight plaintext">$public_fields['lead_image'] = array(
+  'property' =&gt; 'field_lead_image',
+);
+</pre>
+
+<p>That works, but we are leaking lots of info our API consumers don&rsquo;t need, plus there isn&rsquo;t a simple link to the image. Lets fix that with a custom processor.</p>
+
+<h4>Add a process callback</h4>
+
+<p>RESTful gives us an easy way to process any callback.</p>
+
+<p>Add the following method to our class.</p>
+<pre class="highlight plaintext">/**
+ * Process callback, Remove Drupal specific items from the image array.
+ *
+ * @param array $value
+ *   The image array.
+ *
+ * @return array
+ *   A cleaned image array.
+ */
+protected function fourwordImageProcess($value) {
+
+  return array(
+    'id' =&gt; $value['fid'],
+    'self' =&gt; file_create_url($value['uri']),
+    'filemime' =&gt; $value['filemime'],
+    'filesize' =&gt; $value['filesize'],
+    'width' =&gt; $value['width'],
+    'height' =&gt; $value['height'],
+    'styles' =&gt; $value['image_styles'],
+  );
+}
+</pre>
+
+<p>The process function accepts a Drupal field output array, and should return an array of mapped keys and values.</p>
+
+<p>We use this method on our resource by adding a <code>process_callbacks</code> array to the <code>lead_image</code> public_field. Add the following code below the <code>property</code> key.</p>
+<pre class="highlight plaintext">      'process_callbacks' =&gt; array(
+        array($this, 'fourwordImageProcess'),
+      ),
+</pre>
+
+<p>Finally there is a neat little function that will add image styles. Add the following after the <code>process_callbacks</code>.</p>
+<pre class="highlight plaintext">'image_styles' =&gt; array('thumbnail', 'medium', 'large'),
+</pre>
+
+<p>Let&rsquo;s wrap up by putting this latest work into our git repository.</p>
+
+<p><code>git add .</code></p>
+
+<p><code>git commit -am &quot;end of lesson3&quot;</code></p>
+
+<h4>Extra Credit</h4>
+
+<ul>
+<li><em>Silver</em>: Add a resource for the series by copying the categories endpoint and add a new property called series using the <code>field_blog_series_term_tree</code> property to link to it like categories.</li>
+<li><em>Gold</em>: Create an endpoint that links to the user API resource who authored the blog post.</li>
+<li><em>Platinum</em>: Create a new endpoint that exposes the sites variables see (this example)[<a href="https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/modules/restful_example/plugins/restful/variable/1.0/">https://github.com/RESTful-Drupal/restful/blob/7.x-1.x/modules/restful_example/plugins/restful/variable/1.0/</a>]</li>
+</ul>
+
+            </div>
+            <nav class="main-content-nav clearfix" role="navigation">
+              <ul>
+                <li><a class="previous" href="1_6-API-tools.html">Previous</a></li>
+                <li><a class="next" href="2_1-API-Best-Practices.html">Next</a></li>
+              </ul>
+            </nav>
+          </section>
+
+          <aside id="sidr" class="aside-content" role="complementary">
+            <div class="aside-wrapper">
+
+              <div class="block table-of-contents">
+                <h3>Table of Contents</h3>
+                <nav role="navigation">
+                  <ul>
+                    <li class='child '><a href="./">Headless Drupal Training - DrupalCon Barcelona 2015</a></li><li class='child '><a href="1_0-introduction-to-headless-drupal.html">1 Introduction to Headless Drupal</a></li><li class='child '><a href="1_5-using-APIs.html">1.5 What exactly is a REST API?</a></li><li class='child '><a href="1_6-API-tools.html">1.6 API Tools</a></li><li class='child active'><a href="2_0-drupal-services.html">2 Drupal Services</a></li><li class='child '><a href="2_1-API-Best-Practices.html">2.1 API Best Practices</a></li><li class='child '><a href="3_0-intro-to-nodejs.html">3 Intro to Node.js</a></li><li class='child '><a href="4_0-introduction-to-express.html">4 Intro to ExpressJS</a></li><li class='child '><a href="5_0-caching-drupal-content-in-nodejs.html">5 Caching Drupal Content in Node.js</a></li><li class='child '><a href="6_0-reference-implementation.html">6 Reference implementation introduction</a></li><li class='child '><a href="7_0-headless-ahas.html">7 Headless A-ha&rsquo;s</a></li><li class='child '><a href="8_0-strategies-for-user-generated-content.html">8 Strategies for User Generated Content</a></li>
+                  </ul>
+                </nav>
+              </div>
+
+              <div class="block open-source">
+                <h3>This book is open source</h3>
+                <p>The source of this book is <a href="https://github.com/mirzu/headless-training-book">hosted on Github</a>. Go, ahead. Check it out.</p>
+              </div>
+
+              <!--
+              <div class="block downloads">
+                <h3>Downloads</h3>
+                <p>Download this book in
+                    <a href="#">PDF</a>, <a href="#">mobi</a>, and <a href="#">epub</a>
+                  form for free.
+                </p>
+              </div>
+
+              <div class="block translations">
+                <h3>Book translations</h3>
+                <p>This book is translated into
+                  <a href="#">Spanish</a>
+                  and <a href="#">English</a>.
+                  You can help with more translations <a href="https://github.com/mirzu/headless-training-book">on Github</a>.
+                </p>
+              </div>
+              -->
+
+              <div class="block license">
+                <h3>License</h3>
+                <p>This book is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0">Attribution-NonCommercial-ShareAlike</a> license.</p>
+              </div>
+
+            </div><!-- end aside-wrapper -->
+          </aside>
+
+        </div><!-- end content-wrapper -->
+
+      <footer class="page-footer">
+        <div class="footer-wrapper">
+          <small class="small-text">Made with <a href="http://bitbooks.cc">Bitbooks</a></small>
+        </div><!-- end footer-wrapper -->
+      </footer>
+
+    </div><!-- end page-wrapper -->
+
+    <!-- include scripts just before the close of the body tag -->
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="themes/epsilon/javascripts/jquery.sidr.min.js" type="text/javascript"></script>
+    <script src="themes/epsilon/javascripts/anchor.min.js" type="text/javascript"></script>
+    <script src="themes/epsilon/javascripts/epsilon.js" type="text/javascript"></script>
+  </body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>5 Caching Drupal Content in Node.js | Headless Training Book</title>
+
+    <!-- Styles and fonts -->
+    <link href="themes/epsilon/stylesheets/epsilon.css" rel="stylesheet" type="text/css" />
+    <link href="themes/epsilon/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
+    <link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700|Noticia+Text:400,400italic,700,700italic&subset=latin,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <script src="themes/epsilon/javascripts/modernizr.js" type="text/javascript"></script>
+  </head>
+
+  <body class="x5_0-caching-drupal-content-in-nodejs epsilon">
+    <div class="page-wrapper">
+
+      <a id="menu-toggle" class="menu-toggle" href="#sidr"><span class="bitcon-list"></span><span class="menu-toggle-text">Toggle Menu</span></a>
+      <header class="page-header" role="banner">
+<a class="invisilink" href="./">            <span class="book-title">Headless Training Book</span>
+</a>        <span class="book-author">by Michal Minecki</span>
+      </header>
+
+        <div class="content-wrapper clearfix">
+
+          <!--[if lt IE 7]>
+              <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+          <![endif]-->
+
+          <section class="main-content" role="main">
+            <div class="main-content-source">
+              <h1>5 Caching Drupal Content in Node.js</h1>
+
+<h2>Outline</h2>
+
+<ul>
+<li>Redis</li>
+<li>Cache concepts</li>
+<li>Activities</li>
+</ul>
+
+<h2>Redis</h2>
+
+<p><img src="http://drupo.co/images/training/redis.png" /></p>
+
+<p>Redis is an open source, BSD licensed, advanced key-value cache and store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets, sorted sets, bitmaps and hyperloglogs.</p>
+
+<blockquote>
+<p><a href="http://redis.io/">Redis</a></p>
+</blockquote>
+
+<h2>Cache concepts</h2>
+
+<ul>
+<li>Cache everything.</li>
+<li>Have a standardized method for creating keys.</li>
+<li>Figure out early on if you want to cache an item.</li>
+<li>Redis gives you a few ways to make this happen.
+
+<ul>
+<li>Hashes
+
+<ul>
+<li>Known data structure</li>
+<li>Only <code>get</code>/<code>set</code> what you need (this is something you have to figure out)</li>
+<li>Slow</li>
+</ul></li>
+<li>Strings
+
+<ul>
+<li>Serialize &amp; De-serialize on each request.</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>Always check your cache. Drupal is slow, and you&rsquo;ll want to avoid making a network round-trip if you can.</p>
+
+<p>Take advantage of <a href="http://redis.io/commands/mget">multi-get</a>. This prevents us from making multiple round-trips to Redis. This is especially important if Redis is not physically located near your front-end.</p>
+<pre class="highlight javascript"><span class="nx">client</span><span class="p">.</span><span class="nx">mget</span><span class="p">([</span><span class="s1">'my-key'</span><span class="p">,</span> <span class="s1">'my-second-key'</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+<span class="p">})</span>
+</pre>
+
+<h2>Activities</h2>
+
+<h3>Requesting Data from Drupal</h3>
+
+<p>Require some new libraries we&rsquo;ll need for these activities.</p>
+
+<ul>
+<li>Copy <code>app.default.js</code> to <code>app.js</code></li>
+<li>Require <code>redis</code>, <code>request</code>, and <code>crypto</code>.</li>
+<li>Create a <code>redis</code> client, <code>client = redis.createClient();</code></li>
+</ul>
+
+<hr>
+
+<p>Install necessary modules
+<code>npm --save adaro express redis crypto request</code></p>
+<pre class="highlight javascript"><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">),</span>
+      <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">),</span>
+      <span class="nx">adaro</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adaro'</span><span class="p">),</span>
+      <span class="nx">redis</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'redis'</span><span class="p">),</span>
+      <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">),</span>
+      <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'crypto'</span><span class="p">),</span>
+      <span class="nx">client</span> <span class="o">=</span> <span class="nx">redis</span><span class="p">.</span><span class="nx">createClient</span><span class="p">(),</span>
+      <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+</pre>
+
+<ul>
+<li>Create a route that listens on <code>/posts</code> route.</li>
+<li>Request data from Drupal</li>
+</ul>
+<pre class="highlight javascript"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/posts'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">request</span><span class="p">({</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s1">'http://USERNAME.drupal.dcbarcelona.4kclass.com:8080/api/v1.2/articles'</span><span class="p">,</span>
+    <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre>
+
+<blockquote>
+<p>Visit <a href="http://USERNAME.drupal.dcbarcelona.4kclass.com:PORT/posts">http://USERNAME.drupal.headless.dcbarcelona.4kclass.com:PORT/posts</a></p>
+</blockquote>
+
+<p>Every time someone makes a request for the <code>/posts</code> route, an external data source will be fetched. The <code>request()</code> function takes two parameters, an object with some options, and a callback; in the call back is where you can return the data.</p>
+
+<ul>
+<li><code>url</code> is our remote environment</li>
+<li><code>json</code> lets request know that our response is JSON and it should automatically parse the response.</li>
+</ul>
+
+<p>For the callback function you get three variables, <code>error</code>, <code>response</code>, <code>body</code>.</p>
+
+<h3>Cache Drupal Response</h3>
+
+<p>Store the remote url and our <code>cacheKey</code> as variables so they can be reused. Make sure these variables are declared within the <code>app.get()</code> callback.</p>
+<pre class="highlight javascript"><span class="kd">var</span> <span class="nx">remote</span> <span class="o">=</span> <span class="s1">'http://USERNAME.drupal.dcbarcelona.4kclass.com:8080/api/v1.2/articles'</span><span class="p">,</span>
+    <span class="nx">cacheKey</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHash</span><span class="p">(</span><span class="s1">'sha1'</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span> <span class="o">+</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span><span class="p">).</span><span class="nx">digest</span><span class="p">(</span><span class="s1">'hex'</span><span class="p">);</span>
+</pre>
+
+<ul>
+<li>Change the <code>url</code> option of <em>request</em> to be the <code>remote</code> variable.</li>
+</ul>
+
+<p>Your <code>cacheKey</code> is a <code>sha1</code> hash of the request URL and the port (combined). This is something that should be unique to each request, otherwise you might accidentally return incorrect data.</p>
+
+<p>Now, request the <em>data</em> at the specific key we just created. This should be included within the <code>app.get()</code> callback. With just this you&rsquo;ll only see <code>null, null</code> in the console; we haven&rsquo;t yet set the cache key.</p>
+<pre class="highlight javascript"><span class="nx">client</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">cacheKey</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">reply</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">reply</span><span class="p">)</span>
+<span class="p">});</span>
+</pre>
+
+<p><strong>We only want to make requests to Drupal if there is nothing in our cache.</strong></p>
+
+<p>Every HTTP request you have to make will slow down your application. Speed matters. <em>Cache everything!</em></p>
+
+<hr>
+<pre class="highlight javascript"><span class="nx">client</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">cacheKey</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">reply</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">reply</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">reply</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">request</span><span class="p">({</span>
+      <span class="na">url</span><span class="p">:</span> <span class="nx">remote</span><span class="p">,</span>
+      <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre>
+
+<p>In this instance we&rsquo;re only making a request to Drupal if the <code>reply</code> from Redis was <code>null</code>.</p>
+
+<p>We can use the <code>.set()</code> method from the node-redis library to save the response from Drupal in Redis.</p>
+<pre class="highlight javascript"><span class="nx">client</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">reply</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// DO STUFF
+</span><span class="p">});</span>
+</pre>
+
+<ul>
+<li>Use <code>client.set()</code> to store the response from Drupal in Redis.</li>
+<li>Ensure the JSON is stored as a string in Redis, and parsed when returned.</li>
+</ul>
+
+<hr>
+<pre class="highlight javascript"><span class="nx">client</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">cacheKey</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">reply</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">reply</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">reply</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">request</span><span class="p">({</span>
+      <span class="na">url</span><span class="p">:</span> <span class="nx">remote</span><span class="p">,</span>
+      <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">client</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">cacheKey</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">body</span><span class="p">),</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">reply</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre>
+
+<h3><em>Even More Advanced</em></h3>
+
+<ul>
+<li>Use a <code>multi object</code> to set cached data at it&rsquo;s <code>ttl</code>.</li>
+<li>Create a dust template to render this data.</li>
+<li>Create an optional route parameter to filter all posts by their id
+
+<ul>
+<li>Change the template for this single post.</li>
+</ul></li>
+</ul>
+
+            </div>
+            <nav class="main-content-nav clearfix" role="navigation">
+              <ul>
+                <li><a class="previous" href="4_0-introduction-to-express.html">Previous</a></li>
+                <li><a class="next" href="6_0-reference-implementation.html">Next</a></li>
+              </ul>
+            </nav>
+          </section>
+
+          <aside id="sidr" class="aside-content" role="complementary">
+            <div class="aside-wrapper">
+
+              <div class="block table-of-contents">
+                <h3>Table of Contents</h3>
+                <nav role="navigation">
+                  <ul>
+                    <li class='child '><a href="./">Headless Drupal Training - DrupalCon Barcelona 2015</a></li><li class='child '><a href="1_0-introduction-to-headless-drupal.html">1 Introduction to Headless Drupal</a></li><li class='child '><a href="1_5-using-APIs.html">1.5 What exactly is a REST API?</a></li><li class='child '><a href="1_6-API-tools.html">1.6 API Tools</a></li><li class='child '><a href="2_0-drupal-services.html">2 Drupal Services</a></li><li class='child '><a href="2_1-API-Best-Practices.html">2.1 API Best Practices</a></li><li class='child '><a href="3_0-intro-to-nodejs.html">3 Intro to Node.js</a></li><li class='child '><a href="4_0-introduction-to-express.html">4 Intro to ExpressJS</a></li><li class='child active'><a href="5_0-caching-drupal-content-in-nodejs.html">5 Caching Drupal Content in Node.js</a></li><li class='child '><a href="6_0-reference-implementation.html">6 Reference implementation introduction</a></li><li class='child '><a href="7_0-headless-ahas.html">7 Headless A-ha&rsquo;s</a></li><li class='child '><a href="8_0-strategies-for-user-generated-content.html">8 Strategies for User Generated Content</a></li>
+                  </ul>
+                </nav>
+              </div>
+
+              <div class="block open-source">
+                <h3>This book is open source</h3>
+                <p>The source of this book is <a href="https://github.com/mirzu/headless-training-book">hosted on Github</a>. Go, ahead. Check it out.</p>
+              </div>
+
+              <!--
+              <div class="block downloads">
+                <h3>Downloads</h3>
+                <p>Download this book in
+                    <a href="#">PDF</a>, <a href="#">mobi</a>, and <a href="#">epub</a>
+                  form for free.
+                </p>
+              </div>
+
+              <div class="block translations">
+                <h3>Book translations</h3>
+                <p>This book is translated into
+                  <a href="#">Spanish</a>
+                  and <a href="#">English</a>.
+                  You can help with more translations <a href="https://github.com/mirzu/headless-training-book">on Github</a>.
+                </p>
+              </div>
+              -->
+
+              <div class="block license">
+                <h3>License</h3>
+                <p>This book is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0">Attribution-NonCommercial-ShareAlike</a> license.</p>
+              </div>
+
+            </div><!-- end aside-wrapper -->
+          </aside>
+
+        </div><!-- end content-wrapper -->
+
+      <footer class="page-footer">
+        <div class="footer-wrapper">
+          <small class="small-text">Made with <a href="http://bitbooks.cc">Bitbooks</a></small>
+        </div><!-- end footer-wrapper -->
+      </footer>
+
+    </div><!-- end page-wrapper -->
+
+    <!-- include scripts just before the close of the body tag -->
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="themes/epsilon/javascripts/jquery.sidr.min.js" type="text/javascript"></script>
+    <script src="themes/epsilon/javascripts/anchor.min.js" type="text/javascript"></script>
+    <script src="themes/epsilon/javascripts/epsilon.js" type="text/javascript"></script>
+  </body>
+</html>

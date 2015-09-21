@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>6 Reference implementation introduction | Headless Training Book</title>
+
+    <!-- Styles and fonts -->
+    <link href="themes/epsilon/stylesheets/epsilon.css" rel="stylesheet" type="text/css" />
+    <link href="themes/epsilon/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
+    <link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700|Noticia+Text:400,400italic,700,700italic&subset=latin,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <script src="themes/epsilon/javascripts/modernizr.js" type="text/javascript"></script>
+  </head>
+
+  <body class="x6_0-reference-implementation epsilon">
+    <div class="page-wrapper">
+
+      <a id="menu-toggle" class="menu-toggle" href="#sidr"><span class="bitcon-list"></span><span class="menu-toggle-text">Toggle Menu</span></a>
+      <header class="page-header" role="banner">
+<a class="invisilink" href="./">            <span class="book-title">Headless Training Book</span>
+</a>        <span class="book-author">by Michal Minecki</span>
+      </header>
+
+        <div class="content-wrapper clearfix">
+
+          <!--[if lt IE 7]>
+              <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+          <![endif]-->
+
+          <section class="main-content" role="main">
+            <div class="main-content-source">
+              <h1>6 Reference implementation introduction</h1>
+
+<h2>Outline</h2>
+
+<ul>
+<li>Reference Implementation Introduction</li>
+<li>Routing</li>
+<li>Rendering</li>
+</ul>
+
+<h2>Reference Implementation Introduction</h2>
+<pre class="highlight plaintext">███████╗ █████╗ ██╗   ██╗ ██████╗██╗███████╗██████╗
+██╔════╝██╔══██╗██║   ██║██╔════╝██║██╔════╝██╔══██╗
+███████╗███████║██║   ██║██║     ██║█████╗  ██████╔╝
+╚════██║██╔══██║██║   ██║██║     ██║██╔══╝  ██╔══██╗
+███████║██║  ██║╚██████╔╝╚██████╗██║███████╗██║  ██║
+╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚═╝╚══════╝╚═╝  ╚═╝
+</pre>
+
+<blockquote>
+<p><a href="https://github.com/fourkitchens/saucier">SAUCIER</a></p>
+</blockquote>
+
+<h3>Why?</h3>
+
+<ul>
+<li>Place to explore ideas about this concept.</li>
+<li>Consistent starting point.</li>
+<li>Solve hard problems once, <em>maybe</em>.</li>
+<li>Maintenance</li>
+</ul>
+
+<h2>Let&rsquo;s Make Something</h2>
+
+<ul>
+<li>Create an <code>./config/env.json</code> file. A template is located at, <code>./config/_env.json</code></li>
+<li>Ensure the <code>local</code> environment in <code>./config/env.json</code> is populated with
+
+<ul>
+<li>The API endpoint you want to operate against.</li>
+<li>The Redis instance you want to get/set information from.</li>
+</ul></li>
+<li>Create an <code>./config/_secrets.json</code> file. A template is located at, <code>./config/secrets.json</code>.</li>
+<li>Populate the <code>./config/secrets.json</code> file.</li>
+</ul>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"wwwSecret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1wo7kwewmi"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"apiSecret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48eusaif6r"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"routeCacheSecret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pb89yxy9zfr"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<h3>Routing</h3>
+
+<p>Breakup your route definitions into logical defaults. Something to remember is that routes are processed in order. Additionally all routes attached in <code>app.js</code> are processed after anything attached in <code>headless.js</code>.</p>
+
+<p><code>routesWeb       = require(&#39;./routes/web&#39;)(headlessDrupal);</code></p>
+<pre class="highlight javascript"><span class="cm">/**
+ * Home
+ */</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">routeMulti</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="s1">'content/home.dust'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">resource</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s1">'foo?bar=1'</span><span class="p">,</span>
+    <span class="s1">'foo?baz=3'</span>
+  <span class="p">],</span>
+  <span class="na">processors</span><span class="p">:</span> <span class="p">[</span><span class="s1">'homepage'</span><span class="p">,</span> <span class="s1">'googleAnalytics'</span><span class="p">]</span>
+<span class="p">});</span>
+</pre>
+
+<blockquote>
+<p><a href="https://github.com/fourkitchens/saucier/blob/master/routes/web.js">web.js</a></p>
+</blockquote>
+
+<p>Routes for listing pages, collections if items, are identified with <code>routeSection()</code>. Currently the caching of data from listing pages is <em>not</em> supported, but should be upcoming.</p>
+<pre class="highlight javascript"><span class="cm">/**
+ * Posts
+ */</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">routeSection</span><span class="p">(</span><span class="s1">'/posts'</span><span class="p">,</span> <span class="s1">'content/posts/posts.dust'</span><span class="p">,</span> <span class="p">{});</span>
+</pre>
+
+<p>In it&rsquo;s most basic form, <code>routeSection</code>, and <code>routeItem</code> are wrappers around the basic <code>get</code> method from Express. However here we have the option to attach some additional <em>options</em>.</p>
+
+<p>The first parameter is always the route to match, this can be a regex. The second parameter is the template that will be used to render the final response. Finally, the <code>options</code> object.</p>
+
+<p>There are a few optional keys, but the required one is the <code>resource</code> key. This is the internal API path. This is an array, and accepts unlimited values. Each request will be processed asynchronously, and their values returned, keyed by their name.</p>
+
+<p>We&rsquo;ll refer to this as <em>multi-get</em> in the future.</p>
+<pre class="highlight javascript"><span class="cm">/**
+ * Posts
+ */</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">routeSection</span><span class="p">(</span><span class="s1">'/posts'</span><span class="p">,</span> <span class="s1">'content/posts/posts.dust'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">resource</span><span class="p">:</span> <span class="p">[</span><span class="s1">'blogposts'</span><span class="p">],</span>
+  <span class="na">processors</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">});</span>
+</pre>
+
+<p>Another additional route option is, <code>passQuery: true</code>. This forwards all query parameters from the initial request to the back-end. Additionally you may want to create more routes for preforming actions on posts.</p>
+<pre class="highlight javascript"><span class="nx">app</span><span class="p">.</span><span class="nx">routeSection</span><span class="p">(</span><span class="s1">'/posts'</span><span class="p">,</span> <span class="s1">'content/posts/posts.dust'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">resource</span><span class="p">:</span> <span class="p">[</span><span class="s1">'posts?range=25'</span><span class="p">],</span>
+  <span class="na">passQuery</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">routeSection</span><span class="p">(</span><span class="s1">'/posts/:type'</span><span class="p">,</span> <span class="s1">'content/posts/posts.dust'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">resource</span><span class="p">:</span> <span class="p">[</span><span class="s1">'posts?filter[types]={nid}&amp;range=25'</span><span class="p">],</span>
+  <span class="na">passQuery</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">routeItem</span><span class="p">(</span><span class="s1">'/posts/:type/:title'</span><span class="p">,</span> <span class="s1">'content/posts/post.dust'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">resource</span><span class="p">:</span> <span class="p">[</span><span class="s1">'posts/{nid}'</span><span class="p">]</span>
+<span class="p">});</span>
+</pre>
+
+<h4>handleGet</h4>
+<pre class="highlight javascript"><span class="cm">/**
+ * Handle GET responses in a generic way
+ * @private
+ * @param {(string|regexp)} route The route to match.
+ * @param {string} template Template name that will be used to format the response
+ * @param {object} options An object that configures the Controller instance
+ * @return {object} res The response object
+ */</span>
+<span class="kd">var</span> <span class="nx">handleGet</span>         <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">route</span><span class="p">,</span> <span class="nx">template</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+   <span class="cm">/**
+    * Handle GET responses in a generic way
+    * @private
+    * @param {(string|regexp)} route The route to match.
+    * @param {string} template Template name that will be used to format the response
+    * @param {object} options An object that configures the Controller instance
+    * @return {object} res The response object
+    */</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">route</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">path</span><span class="p">;</span>
+    <span class="nx">path</span> <span class="o">+=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">).</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">0</span> <span class="p">?</span> <span class="nx">helpers</span><span class="p">.</span><span class="nx">serialize</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">)</span> <span class="p">:</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="nx">debug</span><span class="p">(</span><span class="s1">'PATH: '</span> <span class="o">+</span> <span class="nx">path</span><span class="p">);</span>
+    <span class="nx">debug</span><span class="p">(</span><span class="s1">'ROUTE TYPE: '</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">type</span><span class="p">);</span>
+    <span class="nx">Q</span><span class="p">(</span><span class="nx">helpers</span><span class="p">.</span><span class="nx">getConfig</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">config</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">template</span><span class="p">,</span> <span class="nx">templateEngine</span><span class="p">,</span> <span class="nx">keepAliveAgent</span><span class="p">))</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">api</span><span class="p">.</span><span class="nx">get</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">cache</span><span class="p">.</span><span class="nx">set</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">processData</span><span class="p">.</span><span class="nx">prepare</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">render</span><span class="p">.</span><span class="nx">parse</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span>
+                <span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+                  <span class="s1">'Cache-Control'</span><span class="err">:</span> <span class="s1">'max-age=86400'</span><span class="p">,</span>
+                  <span class="s1">'Expires'</span><span class="err">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">+</span> <span class="mi">86400000</span><span class="p">).</span><span class="nx">toUTCString</span><span class="p">()</span>
+                <span class="p">})</span>
+                <span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">next</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+<span class="p">};</span>
+</pre>
+
+<blockquote>
+<p><a href="https://github.com/fourkitchens/saucier/blob/master/lib/headless.js">headless.js</a></p>
+</blockquote>
+
+<ul>
+<li>Implemented custom methods for handling different types of requests.
+
+<ul>
+<li><code>routeMulti</code>, <code>routeSection</code>, <code>routeItem</code></li>
+<li>Each handler is an alias for <code>handleGet</code> and can attach additional options.</li>
+</ul></li>
+<li>Promises.</li>
+<li><code>.then()</code></li>
+<li>Handlers
+
+<ul>
+<li>Cache</li>
+<li>API</li>
+<li>Rendering</li>
+</ul></li>
+</ul>
+
+<h3>Templates and Rendering</h3>
+
+<blockquote>
+<p><a href="http://linkedin.github.io/dustjs/">DustJS</a></p>
+</blockquote>
+
+<p>Dust is mostly just <code>HTML</code>. Templates can be used for rendering in your <strong>application</strong>, and in the <strong>browser</strong>. Browser templates can be served from a CDN, or other high-performance network. Template files can also be cached in the users browser cache; all you need to send is updated JSON for rendering.</p>
+
+<ul>
+<li>Async &amp; streaming operation</li>
+<li>Browser/node compatibility</li>
+<li>Extended Mustache/ctemplate syntax</li>
+<li>Clean, low-level API</li>
+<li>High performance</li>
+</ul>
+
+<p>The following examples use some syntax you might not be familiar with, don&rsquo;t worry about that for now. For example, your template code,</p>
+<pre class="highlight html">{title}
+<span class="nt">&lt;ul&gt;</span>
+{#names}
+  <span class="nt">&lt;li&gt;</span>{name}<span class="nt">&lt;/li&gt;</span>{~n}
+{/names}
+<span class="nt">&lt;/ul&gt;</span>
+</pre>
+
+<p>and, your JSON data,</p>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+ </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Famous People"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"names"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Larry"</span><span class="w"> </span><span class="p">},{</span><span class="w"> </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Curly"</span><span class="w"> </span><span class="p">},{</span><span class="w"> </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moe"</span><span class="w"> </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>gives you something like,</p>
+<pre class="highlight html">Famous People
+<span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Larry<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Curly<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Moe<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre>
+
+<p>There is a base template at <code>workspace/node/headless-framework/_src/templates/base_template.dust</code>. This should be your wrapper. If you&rsquo;re familiar with Sass, then the modularity of Dust will make sense.</p>
+
+<p>Each of your partials should be exporting a <em>block</em>, but to render that <em>block</em> we need to let the parent partial know about it.</p>
+
+<blockquote>
+<p><code>{+pageContent/}</code></p>
+</blockquote>
+
+<p>The next template we&rsquo;ll create is the actual partial for rendering the blog posts.</p>
+<pre class="highlight plaintext">{&gt;"base_template.dust" title="Posts"/}
+
+{&lt;pageContent}
+  // your content
+{/pageContent}
+</pre>
+
+<p>This let&rsquo;s dust know that we&rsquo;re returning a <em>block</em> named <code>pageContent</code> and everything within the markup should be inserted into the body of the base template.</p>
+
+<p>The syntax for loops in dust is pretty simplistic, and it&rsquo;s what you&rsquo;ll probably be using most of the time. This loops though the specific array of objects for our blog posts listing page. Within the loop, keys are available by their name, <code>{self}</code>, and sub keys are available with dot-notation.</p>
+<pre class="highlight plaintext">{&gt;"base_template.dust" title="Posts"/}
+
+{&lt;pageContent}
+  {#_embedded.fk_blogposts}
+
+  {/_embedded.fk_blogposts}
+{/pageContent}
+</pre>
+
+<p>The final template with some additional <code>HTML</code> structure.</p>
+<pre class="highlight plaintext">{&gt;"base_template.dust" title="Posts"/}
+
+{&lt;pageContent}
+  &lt;div class="wrapper"&gt;
+    &lt;h1&gt;posts&lt;/h1&gt;
+    {#_embedded.fk_blogposts}
+      &lt;h1&gt;
+        &lt;a href="{self}"&gt;
+        {label}
+        &lt;/a&gt;
+      &lt;/h1&gt;
+      &lt;p&gt; Categories:
+      {#categories}
+        {label},
+      {/categories}
+      &lt;p&gt;
+    {/_embedded.fk_blogposts}
+    &lt;a href="{_links.fk_next.href}"&gt;Next&lt;/a&gt;
+  &lt;/div&gt;
+{/pageContent}
+</pre>
+
+<p>You may have noticed, <code>.then(render.parse)</code>. This is where the actual JSON is folded onto the template you just created. This is pretty simple, <code>options.engine.render</code> is Dust. We&rsquo;re not dependent on Dust, as long as your template engine has <code>render</code> function and returns HTML.</p>
+
+<ul>
+<li>Last step</li>
+<li>Any engine that supports <code>.render()</code> could be plugged in.
+
+<ul>
+<li>No dependencies on <code>DustJS</code></li>
+</ul></li>
+<li>Only return HTML.</li>
+</ul>
+<pre class="highlight javascript"><span class="nx">options</span><span class="p">.</span><span class="nx">engine</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">template</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">html</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">debug</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="nx">deferred</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">helpers</span><span class="p">.</span><span class="nx">createErrorResponse</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="p">[</span><span class="nx">error</span><span class="p">]));</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">debug</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">template</span><span class="p">);</span>
+    <span class="nx">deferred</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre>
+
+<blockquote>
+<p><a href="https://github.com/fourkitchens/saucier/blob/master/lib/render.js">render.js</a></p>
+</blockquote>
+
+            </div>
+            <nav class="main-content-nav clearfix" role="navigation">
+              <ul>
+                <li><a class="previous" href="5_0-caching-drupal-content-in-nodejs.html">Previous</a></li>
+                <li><a class="next" href="7_0-headless-ahas.html">Next</a></li>
+              </ul>
+            </nav>
+          </section>
+
+          <aside id="sidr" class="aside-content" role="complementary">
+            <div class="aside-wrapper">
+
+              <div class="block table-of-contents">
+                <h3>Table of Contents</h3>
+                <nav role="navigation">
+                  <ul>
+                    <li class='child '><a href="./">Headless Drupal Training - DrupalCon Barcelona 2015</a></li><li class='child '><a href="1_0-introduction-to-headless-drupal.html">1 Introduction to Headless Drupal</a></li><li class='child '><a href="1_5-using-APIs.html">1.5 What exactly is a REST API?</a></li><li class='child '><a href="1_6-API-tools.html">1.6 API Tools</a></li><li class='child '><a href="2_0-drupal-services.html">2 Drupal Services</a></li><li class='child '><a href="2_1-API-Best-Practices.html">2.1 API Best Practices</a></li><li class='child '><a href="3_0-intro-to-nodejs.html">3 Intro to Node.js</a></li><li class='child '><a href="4_0-introduction-to-express.html">4 Intro to ExpressJS</a></li><li class='child '><a href="5_0-caching-drupal-content-in-nodejs.html">5 Caching Drupal Content in Node.js</a></li><li class='child active'><a href="6_0-reference-implementation.html">6 Reference implementation introduction</a></li><li class='child '><a href="7_0-headless-ahas.html">7 Headless A-ha&rsquo;s</a></li><li class='child '><a href="8_0-strategies-for-user-generated-content.html">8 Strategies for User Generated Content</a></li>
+                  </ul>
+                </nav>
+              </div>
+
+              <div class="block open-source">
+                <h3>This book is open source</h3>
+                <p>The source of this book is <a href="https://github.com/mirzu/headless-training-book">hosted on Github</a>. Go, ahead. Check it out.</p>
+              </div>
+
+              <!--
+              <div class="block downloads">
+                <h3>Downloads</h3>
+                <p>Download this book in
+                    <a href="#">PDF</a>, <a href="#">mobi</a>, and <a href="#">epub</a>
+                  form for free.
+                </p>
+              </div>
+
+              <div class="block translations">
+                <h3>Book translations</h3>
+                <p>This book is translated into
+                  <a href="#">Spanish</a>
+                  and <a href="#">English</a>.
+                  You can help with more translations <a href="https://github.com/mirzu/headless-training-book">on Github</a>.
+                </p>
+              </div>
+              -->
+
+              <div class="block license">
+                <h3>License</h3>
+                <p>This book is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0">Attribution-NonCommercial-ShareAlike</a> license.</p>
+              </div>
+
+            </div><!-- end aside-wrapper -->
+          </aside>
+
+        </div><!-- end content-wrapper -->
+
+      <footer class="page-footer">
+        <div class="footer-wrapper">
+          <small class="small-text">Made with <a href="http://bitbooks.cc">Bitbooks</a></small>
+        </div><!-- end footer-wrapper -->
+      </footer>
+
+    </div><!-- end page-wrapper -->
+
+    <!-- include scripts just before the close of the body tag -->
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="themes/epsilon/javascripts/jquery.sidr.min.js" type="text/javascript"></script>
+    <script src="themes/epsilon/javascripts/anchor.min.js" type="text/javascript"></script>
+    <script src="themes/epsilon/javascripts/epsilon.js" type="text/javascript"></script>
+  </body>
+</html>

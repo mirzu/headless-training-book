@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>4 Intro to ExpressJS | Headless Training Book</title>
+
+    <!-- Styles and fonts -->
+    <link href="themes/epsilon/stylesheets/epsilon.css" rel="stylesheet" type="text/css" />
+    <link href="themes/epsilon/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
+    <link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700|Noticia+Text:400,400italic,700,700italic&subset=latin,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <script src="themes/epsilon/javascripts/modernizr.js" type="text/javascript"></script>
+  </head>
+
+  <body class="x4_0-introduction-to-express epsilon">
+    <div class="page-wrapper">
+
+      <a id="menu-toggle" class="menu-toggle" href="#sidr"><span class="bitcon-list"></span><span class="menu-toggle-text">Toggle Menu</span></a>
+      <header class="page-header" role="banner">
+<a class="invisilink" href="./">            <span class="book-title">Headless Training Book</span>
+</a>        <span class="book-author">by Michal Minecki</span>
+      </header>
+
+        <div class="content-wrapper clearfix">
+
+          <!--[if lt IE 7]>
+              <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+          <![endif]-->
+
+          <section class="main-content" role="main">
+            <div class="main-content-source">
+              <h1>4 Intro to ExpressJS</h1>
+
+<p>At the end of this section you&rsquo;ll have a basic understanding of NPM, ExpressJS and templates.</p>
+
+<h2>Outline</h2>
+
+<ul>
+<li>What is Express.JS</li>
+<li>What is NPM</li>
+<li>Your first Express Application</li>
+<li>Templates with DustJS</li>
+</ul>
+
+<h2>What is Express</h2>
+
+<blockquote>
+<p>Fast, unopinionated, minimalist web framework for Node.js</p>
+
+<p>Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.</p>
+</blockquote>
+
+<p>Simply, a tool to help you build things for the web.</p>
+
+<h2>What is NPM</h2>
+
+<blockquote>
+<p>NPM makes it easy for JavaScript developers to share and reuse code, and it makes it easy to update the code that you&rsquo;re sharing.</p>
+
+<p>DO NOT USE <code>sudo npm install -g</code></p>
+</blockquote>
+
+<p>NPM is a package manger for node. It controls local and global dependencies. If you already have Node.JS installed, you should have NPM. NPM keeps it&rsquo;s information about your project in a <code>package.json</code> file.</p>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0-introduction-to-express"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Introduction to ExpressJS"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app.js"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"adaro"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.0.0-15"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"express"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.12.4"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>To ensure that everything is operating normally run, <code>npm -v</code> .</p>
+
+<h3>NPM Tricks</h3>
+
+<ul>
+<li>You can run <code>npm init</code> to help you scaffold your <code>package.json</code> file.</li>
+<li>For dependencies you can keep <code>dev</code> dependencies separate with <code>--save-dev</code>.
+
+<ul>
+<li>When deploying use, <code>npm install --production</code>.</li>
+</ul></li>
+<li>You can use <code>git</code> repositories as dependencies.
+
+<ul>
+<li>If you have version <code>1.1.65</code> or greater you can use GitHub URLs, <code>&quot;mocha&quot;: &quot;mochajs/mocha&quot;</code></li>
+<li><a href="https://docs.npmjs.com/files/package.json#git-urls-as-dependencies">More Information</a></li>
+</ul></li>
+</ul>
+
+<h2>Your first Express Application</h2>
+
+<p>Lets build a basic express app, with routes, some middleware and a template engine. All this work will take place in the folder <code>train-headless/workspace/node/introduction-to-express</code>.</p>
+
+<blockquote>
+<p>This directory should empty, except for a <code>.gitkeep</code> file.</p>
+</blockquote>
+
+<h3>Setup</h3>
+
+<ul>
+<li>Type <code>npm init</code> to get started creating out <code>package.json</code> file.
+
+<ul>
+<li> Most of these options don&rsquo;t matter for this exercise. However the entry point should be <code>app.js</code> to be consistent with the finished examples.</li>
+</ul></li>
+</ul>
+
+<p>Your prompt should look very similar to the following (<em>I&rsquo;ve removed some parts</em>),</p>
+<pre class="highlight shell">This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+Press ^C at any <span class="nb">time </span>to quit.
+name: <span class="o">(</span>introduction-to-express<span class="o">)</span>
+version: <span class="o">(</span>1.0.0<span class="o">)</span>
+description:
+entry point: <span class="o">(</span>index.js<span class="o">)</span> app.js
+<span class="nb">test command</span>:
+git repository:
+keywords:
+author:
+license: <span class="o">(</span>ISC<span class="o">)</span>
+About to write to <span class="nv">$HOME</span>/Developer/training/train-headless/workspace/node/0-introduction-to-express/package.json:
+
+
+Is this ok? <span class="o">(</span>yes<span class="o">)</span>
+</pre>
+
+<p>Create your <code>*.js</code> file. If you happened to have left the entry point value of your <code>package.json</code> as <code>index.js</code>, that&rsquo;s fine.</p>
+
+<ul>
+<li>Run <code>touch app.js</code>, or <code>touch index.js</code>, depending on what the entry point is for your application.</li>
+<li>Run <code>npm install --save express adaro</code>. This will install <em>local</em> copies of the Express and Adaro libraries.</li>
+</ul>
+
+<blockquote>
+<p>DO NOT USE <code>sudo npm install -g</code></p>
+
+<p>When working with Node.JS, in general, your dependencies are local to the project, not managed globally.</p>
+</blockquote>
+
+<h3>Creating your Application</h3>
+
+<p>At minimum, your application will create a new instance of the Express object and begin listening on a particular port.</p>
+
+<p>Node uses the CommonJS module system. Node has a simple module loading system. In Node, files and modules are in one-to-one correspondence.</p>
+
+<p>If the module identifier passed to require() is not a native module, and does not begin with <code>/</code>, <code>../</code>, or <code>./</code>, then Node starts at the parent directory of the current module, and adds <code>/node_modules</code>, and attempts to load the module from that location. If it is not found there, then it moves to the parent directory, and so on, until either the module is found, or the root of the tree is reached.</p>
+
+<blockquote>
+<p>Node has several modules compiled into the binary.</p>
+</blockquote>
+
+<p>At this point running, <code>node app.js</code>, this will yield nothing. However, if you have completed the setup tasks correctly, this will run without issues.</p>
+
+<p>:boom:</p>
+<pre class="highlight javascript"><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">),</span>
+      <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+  <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">3000</span><span class="p">);</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'App is listening on %s'</span><span class="p">,</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nx">app</span><span class="p">;</span>
+<span class="p">})();</span>
+</pre>
+
+<p>Let&rsquo;s add a few simple routes to the application. Express can respond to various HTTP verbs as API <a href="http://expressjs.com/4x/api.html#app.METHOD">methods</a>.</p>
+
+<blockquote>
+<p>If you want to have a route listen on all methods, you can use <code>.all()</code></p>
+</blockquote>
+<pre class="highlight javascript"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/example'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'Welcome to DrupalCon Barcelona.'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+
+<p>Express adds a simple <code>.send()</code> method to the response object. This abstracts away most of the boilerplate code to handle responses. We&rsquo;ll look at some more interesting things to send in just a moment.</p>
+
+<p>Start your app with <code>node app.js</code>, and visit <code>http://USERNAME.dcbarcelona.4kclass.com:PORT/example</code> in your browser.</p>
+
+<blockquote>
+<p>Tell me what this matches on, and what it doesn&rsquo;t.</p>
+</blockquote>
+
+<p>Lets create a <code>model</code> object; you can use the sample below, and create a new route to send this object.</p>
+<pre class="highlight javascript"><span class="kd">var</span> <span class="nx">model</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'my-name'</span><span class="p">,</span>
+  <span class="na">location</span><span class="p">:</span> <span class="s1">'my-location'</span><span class="p">,</span>
+  <span class="na">vice</span><span class="p">:</span> <span class="s1">'Coffee'</span>
+<span class="p">};</span>
+</pre>
+
+<blockquote>
+<p>Any ideas what will happen when you vist <code>/api</code>?</p>
+</blockquote>
+<pre class="highlight javascript"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/api'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">model</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+
+<p>Stop your app with <code>ctrl+C</code> and restart with <code>node app.js</code> to load this new route.</p>
+
+<blockquote>
+<p>Maybe you want to send files.</p>
+</blockquote>
+
+<h4>Activities - Send File</h4>
+
+<ul>
+<li>Require the <code>path</code> module</li>
+<li>Create a route that listens on the <code>get</code> HTTP method and serves the <code>package.json</code> file.
+
+<ul>
+<li><em>This is probably a bad idea in production, so just use this for an example.</em></li>
+</ul></li>
+</ul>
+<pre class="highlight javascript"><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/packagejson'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{;</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">sendFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'package.json'</span><span class="p">));</span>
+<span class="p">});</span>
+</pre>
+
+<hr>
+
+<ul>
+<li>An absolute path is required to use <code>res.sendFile()</code></li>
+<li>The <code>join</code> method from the path library accepts unlimited arguments and returns a string.</li>
+<li><code>__dirname</code> is a global for the name of the directory that the currently executing script resides in.</li>
+</ul>
+
+<h3>Templates</h3>
+
+<blockquote>
+<p><a href="https://www.npmjs.com/package/adaro">Adaro</a> - An expressjs plugin for handling DustJS view rendering.
+<a href="http://www.dustjs.com">DustJS</a> - A JavaScript templating engine. It inherits its look from the <a href="https://code.google.com/p/ctemplate/">ctemplate</a> family of languages, and is designed to run asynchronously on both the server and the browser.</p>
+</blockquote>
+
+<ul>
+<li>Require <code>adaro</code>.</li>
+</ul>
+<pre class="highlight javascript"><span class="kd">var</span> <span class="nx">adaro</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adaro'</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'views'</span><span class="p">,</span> <span class="s1">'views'</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">engine</span><span class="p">(</span><span class="s1">'dust'</span><span class="p">,</span> <span class="nx">adaro</span><span class="p">.</span><span class="nx">dust</span><span class="p">({</span><span class="na">cache</span><span class="p">:</span> <span class="kc">false</span><span class="p">}));</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'view engine'</span><span class="p">,</span> <span class="s1">'dust'</span><span class="p">);</span>
+</pre>
+
+<blockquote>
+<p>What is happening here?</p>
+</blockquote>
+
+<hr>
+
+<ul>
+<li>Let Express know where our views are located.</li>
+<li>Create an engine called <code>dust</code> that can be used later.</li>
+<li>Set the <em>view engine</em> to be the previously created engine, <code>dust</code>.</li>
+<li>Enable the use of the <code>.render()</code> method on the response.</li>
+</ul>
+
+<h4>Activities - Template Basics</h4>
+
+<ul>
+<li>Create a template file, <code>index.dust</code> in <code>./views/</code>.</li>
+<li>Use the following,</li>
+</ul>
+<pre class="highlight html"><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>WELCOME TO DrpalCon Barcelona<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>{name}, welcome to DrpalCon Barcelona.<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;h2&gt;</span>Check out my sweet blog.<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre>
+
+<ul>
+<li>Create a route that listens on the <code>get</code> HTTP method, and renders the <em>model</em> object against the template we just created.</li>
+</ul>
+
+<hr>
+<pre class="highlight javascript"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'index'</span><span class="p">,</span> <span class="nx">model</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+
+<ul>
+<li>Listening on the <em>home</em> route.</li>
+<li>Using the <code>index.dust</code> template, with the model object as it&rsquo;s data.</li>
+</ul>
+
+<hr>
+
+<h4>Activities - Intermediate Templates</h4>
+
+<ul>
+<li>Create a <code>posts.js</code> with the following content, require this file.</li>
+</ul>
+<pre class="highlight javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'Matthew'</span><span class="p">,</span>
+  <span class="na">posts</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s1">'id'</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s1">'title'</span><span class="err">:</span> <span class="s1">'Welcome to DrpalCon Barcelona'</span><span class="p">,</span>
+      <span class="s1">'body'</span><span class="err">:</span> <span class="s1">'This is the first entry in my DrpalCon Barcelona travel log.'</span><span class="p">,</span>
+      <span class="s1">'published'</span><span class="err">:</span> <span class="s1">'9/20/2015'</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s1">'id'</span><span class="err">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s1">'title'</span><span class="err">:</span> <span class="s1">'DrpalCon Barcelona is over.'</span><span class="p">,</span>
+      <span class="s1">'body'</span><span class="err">:</span> <span class="s1">'On my way home from DrpalCon Barcelona.'</span><span class="p">,</span>
+      <span class="s1">'published'</span><span class="err">:</span> <span class="s1">'9/27/2015'</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre>
+
+<ul>
+<li>Create an article template, you can start from <code>index.dust</code> for this content.
+
+<ul>
+<li>Dust.JS documentation on looping, <a href="http://www.dustjs.com/guides/getting-started/#looping">http://www.dustjs.com/guides/getting-started/#looping</a></li>
+</ul></li>
+<li>Create a route that listens on the <code>get</code> HTTP method, uses this article listing template, and renders the new content.</li>
+</ul>
+
+<hr>
+<pre class="highlight javascript"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/articles'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+ <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'articles'</span><span class="p">,</span> <span class="nx">content</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+<pre class="highlight html"><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Articles from DrpalCon Barcelona<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>{name}, welcome to DrpalCon Barcelona.<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;h2&gt;</span>Check out my sweet blog.<span class="nt">&lt;/h2&gt;</span>
+    {#posts}
+      <span class="nt">&lt;h3&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/article/{id}"</span><span class="nt">&gt;</span>{title}<span class="nt">&lt;/a&gt;&lt;/h3&gt;</span>
+      <span class="nt">&lt;p&gt;</span>{body}<span class="nt">&lt;/p&gt;</span>
+    {/posts}
+
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre>
+
+<h4>Activities - Advanced Templates</h4>
+
+<ul>
+<li>Create an individual article template</li>
+<li>Create a route which modifies it&rsquo;s output based on a query or route parameter.
+
+<ul>
+<li>Return just a single post matching on <code>post.id</code></li>
+</ul></li>
+</ul>
+
+            </div>
+            <nav class="main-content-nav clearfix" role="navigation">
+              <ul>
+                <li><a class="previous" href="3_0-intro-to-nodejs.html">Previous</a></li>
+                <li><a class="next" href="5_0-caching-drupal-content-in-nodejs.html">Next</a></li>
+              </ul>
+            </nav>
+          </section>
+
+          <aside id="sidr" class="aside-content" role="complementary">
+            <div class="aside-wrapper">
+
+              <div class="block table-of-contents">
+                <h3>Table of Contents</h3>
+                <nav role="navigation">
+                  <ul>
+                    <li class='child '><a href="./">Headless Drupal Training - DrupalCon Barcelona 2015</a></li><li class='child '><a href="1_0-introduction-to-headless-drupal.html">1 Introduction to Headless Drupal</a></li><li class='child '><a href="1_5-using-APIs.html">1.5 What exactly is a REST API?</a></li><li class='child '><a href="1_6-API-tools.html">1.6 API Tools</a></li><li class='child '><a href="2_0-drupal-services.html">2 Drupal Services</a></li><li class='child '><a href="2_1-API-Best-Practices.html">2.1 API Best Practices</a></li><li class='child '><a href="3_0-intro-to-nodejs.html">3 Intro to Node.js</a></li><li class='child active'><a href="4_0-introduction-to-express.html">4 Intro to ExpressJS</a></li><li class='child '><a href="5_0-caching-drupal-content-in-nodejs.html">5 Caching Drupal Content in Node.js</a></li><li class='child '><a href="6_0-reference-implementation.html">6 Reference implementation introduction</a></li><li class='child '><a href="7_0-headless-ahas.html">7 Headless A-ha&rsquo;s</a></li><li class='child '><a href="8_0-strategies-for-user-generated-content.html">8 Strategies for User Generated Content</a></li>
+                  </ul>
+                </nav>
+              </div>
+
+              <div class="block open-source">
+                <h3>This book is open source</h3>
+                <p>The source of this book is <a href="https://github.com/mirzu/headless-training-book">hosted on Github</a>. Go, ahead. Check it out.</p>
+              </div>
+
+              <!--
+              <div class="block downloads">
+                <h3>Downloads</h3>
+                <p>Download this book in
+                    <a href="#">PDF</a>, <a href="#">mobi</a>, and <a href="#">epub</a>
+                  form for free.
+                </p>
+              </div>
+
+              <div class="block translations">
+                <h3>Book translations</h3>
+                <p>This book is translated into
+                  <a href="#">Spanish</a>
+                  and <a href="#">English</a>.
+                  You can help with more translations <a href="https://github.com/mirzu/headless-training-book">on Github</a>.
+                </p>
+              </div>
+              -->
+
+              <div class="block license">
+                <h3>License</h3>
+                <p>This book is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0">Attribution-NonCommercial-ShareAlike</a> license.</p>
+              </div>
+
+            </div><!-- end aside-wrapper -->
+          </aside>
+
+        </div><!-- end content-wrapper -->
+
+      <footer class="page-footer">
+        <div class="footer-wrapper">
+          <small class="small-text">Made with <a href="http://bitbooks.cc">Bitbooks</a></small>
+        </div><!-- end footer-wrapper -->
+      </footer>
+
+    </div><!-- end page-wrapper -->
+
+    <!-- include scripts just before the close of the body tag -->
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="themes/epsilon/javascripts/jquery.sidr.min.js" type="text/javascript"></script>
+    <script src="themes/epsilon/javascripts/anchor.min.js" type="text/javascript"></script>
+    <script src="themes/epsilon/javascripts/epsilon.js" type="text/javascript"></script>
+  </body>
+</html>
