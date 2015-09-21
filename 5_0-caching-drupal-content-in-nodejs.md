@@ -50,7 +50,7 @@ Require some new libraries we'll need for these activities.
 ---
 
 Install necessary modules
-`npm --save redis crypto request`
+`npm --save adaro express redis crypto request`
 
 ```javascript
 var express = require('express'),
