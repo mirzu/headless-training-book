@@ -69,7 +69,7 @@ var express = require('express'),
 ```javascript
 app.get('/posts', function (req, res) {
   request({
-    url: 'http://USERNAME.drupal.dcbarcelona.4kclass.com:8080/api/v1.2/articles',
+    url: 'http://USERNAME.drupal.train-headless.4kclass.com:8080/api/v1.2/articles',
     json: true
   }, function (error, response, body) {
     return res.send(body);
@@ -77,7 +77,7 @@ app.get('/posts', function (req, res) {
 });
 ```
 
-> Visit [http://USERNAME.drupal.headless.dcbarcelona.4kclass.com:PORT/posts](http://USERNAME.drupal.dcbarcelona.4kclass.com:PORT/posts)
+> Visit [http://USERNAME.drupal.headless.train-headless.4kclass.com:PORT/posts](http://USERNAME.drupal.train-headless.4kclass.com:PORT/posts)
 
 Every time someone makes a request for the `/posts` route, an external data source will be fetched. The `request()` function takes two parameters, an object with some options, and a callback; in the call back is where you can return the data.
 
@@ -91,7 +91,7 @@ For the callback function you get three variables, `error`, `response`, `body`.
 Store the remote url and our `cacheKey` as variables so they can be reused. Make sure these variables are declared within the `app.get()` callback.
 
 ```javascript
-var remote = 'http://USERNAME.drupal.dcbarcelona.4kclass.com:8080/api/v1.2/articles',
+var remote = 'http://USERNAME.drupal.train-headless.4kclass.com:8080/api/v1.2/articles',
     cacheKey = crypto.createHash('sha1').update(req.url + process.env.PORT).digest('hex');
 ```
 

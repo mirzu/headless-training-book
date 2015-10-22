@@ -1,4 +1,4 @@
-# Headless Drupal Training - DrupalCon Barcelona 2015
+# Headless Drupal Training
 ## About the training
 Do you want to manage content in Drupal but use something else to deliver it to your users? This is the class for you.
 
